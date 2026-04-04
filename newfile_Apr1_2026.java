@@ -23,3 +23,5 @@ cfg.setDiscoverySpi(spi);
 
 Apache Ignite spi=serviceProviderInterface
 Sysplex, HOST_1_IP="$(host mvd1 | awk '{printf $5l exut}')"
+SatApr 4th 2026
+AAnthropic, OpenAI, Databricks

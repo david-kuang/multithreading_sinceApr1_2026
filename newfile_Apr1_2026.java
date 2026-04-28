@@ -30,6 +30,6 @@ fn main() {
     println!("Hello, worldTDEVYK3 Apr4 2026!");
 }
 Tue Apr 28th 2026 
-I. python3  
+I. python3  https://www.youtube.com/watch?v=th4OBktqK1I 
 II. besides Java jdk 26
 

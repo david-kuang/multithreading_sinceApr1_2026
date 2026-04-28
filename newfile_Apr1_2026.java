@@ -29,4 +29,7 @@ AAnthropic, OpenAI, Databricks
 fn main() {
     println!("Hello, worldTDEVYK3 Apr4 2026!");
 }
+Tue Apr 28th 2026 
+I. python3  
+II. besides Java jdk 26
 

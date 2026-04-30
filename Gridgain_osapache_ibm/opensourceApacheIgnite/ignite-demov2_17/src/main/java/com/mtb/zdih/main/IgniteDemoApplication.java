@@ -1,5 +1,7 @@
 package com.mtb.zdih.main;
 
+import org.apache.ignite.Ignite;
+import org.apache.ignite.IgniteCache;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +18,12 @@ public class IgniteDemoApplication {
 	@Bean
 	public ApplicationRunner applicationRunner() {
 		return args -> {
-			Ignition.start();
+			Ignite ignite = Ignition.start();
+
+			IgniteCache<String, String> cache = ignite.getOrCreateCache("dummy");
+			cache.put("key1","value1");
+
+			System.out.println(cache.get("key1"));
 		};
 	}
 

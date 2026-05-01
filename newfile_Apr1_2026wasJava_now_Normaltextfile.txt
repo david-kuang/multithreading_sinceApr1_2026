@@ -33,3 +33,23 @@ Tue Apr 28th 2026
 I. python3  https://www.youtube.com/watch?v=th4OBktqK1I 
 II. besides Java jdk 26
 Thu Apr 30 & Fri May 1st 2026
+1Gridgain , maven repository dependency, try it out.
+2OpenSource Apache Ignite, highest version 2.18.0 ; how about Open Source Apache Ignite3-3.1.0.zip (3.1.0  3.0.0) {
+2.10.0
+2.11.0
+2.11.1
+2.12.0
+2.13.0
+2.14.0
+2.15.0
+2.16.0
+2.17.0
+2.18.0
+
+2.9.1
+2.9.0
+2.8.1
+2.8.0
+2.7.6
+}
+3Apache Ignite 2.17 based zDIH_IBM_v3.1.0, they may be developing zDIH_IBM_v3.1.1 thats with LDAP, later could be IBM zDIH3.1.2 ??? 

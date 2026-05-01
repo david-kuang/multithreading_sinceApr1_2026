@@ -32,4 +32,5 @@ fn main() {
 Tue Apr 28th 2026 
 I. python3  https://www.youtube.com/watch?v=th4OBktqK1I 
 II. besides Java jdk 26
+Thu Apr 30 & Fri May 1st 2026
 

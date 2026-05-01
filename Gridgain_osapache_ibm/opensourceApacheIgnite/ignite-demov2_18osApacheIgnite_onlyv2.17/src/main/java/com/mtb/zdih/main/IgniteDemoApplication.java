@@ -32,6 +32,7 @@ public class IgniteDemoApplication {
     @Bean
     public Ignite ignite() {
         IgniteConfiguration cfg = new IgniteConfiguration();
+        System.out.printf("IgniteConfiguration newed an instance - %s;\n",cfg.getDiscoverySpi());
         cfg.setDataStorageConfiguration(getDataStorageConfiguration());
 
         cfg.setCacheConfiguration(getCacheConfiguration());
@@ -59,8 +60,13 @@ public class IgniteDemoApplication {
         drc.setInitialSize(10 * 1024 * 1024);
         drc.setMaxSize(40 * 1024 * 1024);
         drc.setPageEvictionMode(DataPageEvictionMode.RANDOM_2_LRU);
-		drc.setPersistenceEnabled(true);
-
+        Boolean getBooleanIsPersistenceEnabled = drc.isPersistenceEnabled();
+        System.out.printf("Is DataRegionConfiguratrion PersistenceEnabled by default? %s;\n",getBooleanIsPersistenceEnabled);
+        if (! getBooleanIsPersistenceEnabled) {
+            drc.setPersistenceEnabled(true);
+            //log.info
+            System.out.printf("Set/Changed drc.isPersistenceEnabled() into %s.\n",drc.isPersistenceEnabled());
+        }
         DataStorageConfiguration dsc = new DataStorageConfiguration();
         dsc.setDefaultDataRegionConfiguration(drc);
 

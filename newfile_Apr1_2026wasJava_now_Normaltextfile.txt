@@ -58,6 +58,15 @@ Wed May 27 2026 Rdis for Windows 5.0.14.1 link=https://github.com/tporadowski/re
 download Redis-x64-5.0.14.1.msi the .exe file 
 install_path-by-default=C:\Program Files\Redis\
 port-by-default=6379
+. Add C:\Program Files\Redis\ in System variable PATH
+. Open a console, launch redis-server
+. redis-cli
+127.0.0.1:6379> set name yhkuang
+OK
+127.0.0.1:6379> get name
+"yhkuang"
+
+
 
 
 

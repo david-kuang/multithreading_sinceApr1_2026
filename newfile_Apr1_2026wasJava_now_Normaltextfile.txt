@@ -1,7 +1,7 @@
 //newfile_Apr1_2026 Thu Apr 2nd 2026
 1. Anthropic 什么是 https://www.anthropic.com/
 2. Claude Code v.1.88
-3. Someone use OpenAI Codex, convert it from JS/TS to Python, then RUST
+3. Someone use OpenAI Codex, convert it from JS/TS（Javascript/Typescript） to Python, then RUST
 4. 什么是RUST
 Reference: https://github.com/instructkr/claw-code?tab=readme-ov-file 
 
@@ -23,7 +23,7 @@ cfg.setDiscoverySpi(spi);
 
 Apache Ignite spi=serviceProviderInterface
 Sysplex, HOST_1_IP="$(host mvd1 | awk '{printf $5l exut}')"
-SatApr 4th 2026
+Sat Apr 4th 2026
 AAnthropic, OpenAI, Databricks
 //RUST halloworld  main.rs
 fn main() {
@@ -65,9 +65,6 @@ port-by-default=6379
 OK
 127.0.0.1:6379> get name
 "yhkuang"
-
-
-
 
 
 

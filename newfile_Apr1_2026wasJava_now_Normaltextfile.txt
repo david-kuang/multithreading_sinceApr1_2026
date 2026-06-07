@@ -67,6 +67,7 @@ OK
 "yhkuang"
 Sat Jun 6th 2026 YHK Keyi. 1TDDADURI 2.will clean up ca7d, (a) remove TCIS10CM as trigger, (b) remove TGGIPRG5 as trigger 
 3. copy back on start_purge; prior to that, backup just in case 4.ca7(D) TGGILD03 triggering TGGIPRG5
+Sun Jun 7th 2026 1Ensure CGGILD03 triggering CGGIPRG5 in Certification environment via CA7(D)
 
 
 

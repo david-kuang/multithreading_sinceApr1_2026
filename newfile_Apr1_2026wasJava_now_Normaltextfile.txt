@@ -67,7 +67,13 @@ OK
 "yhkuang"
 Sat Jun 6th 2026 YHK Keyi. 1TDDADURI 2.will clean up ca7d, (a) remove TCIS10CM as trigger, (b) remove TGGIPRG5 as trigger 
 3. copy back on start_purge; prior to that, backup just in case 4.ca7(D) TGGILD03 triggering TGGIPRG5
-Sun Jun 7th 2026 1Ensure CGGILD03 triggering CGGIPRG5 in Certification environment via CA7(D)
+Sun Jun 7th 2026 1Ensure CGGILD03 triggering CGGIPRG5 in Certification environment via CA7(D) Sat Jun13th 2026
+Math or Mathematica  > factor(X^2-x-2)  Expection: (x-2)(x+1)
+> f:=x->X^3-2*x^2 -12*x +1 ; <enter>    /*Define f(x) = Xpower(3)-2xpower(2) - 12x +1 
+> f(t)+f(1) ; <enter>                   /*that means tpower(3)-2tpower(2)-12t-11
+> plot(f(x), x=-4..5);   
+link1=https://www.symbolab.com/graphing-calculator   or https://www.symbolab.com/solver/calculus-calculator
+
 
 
 

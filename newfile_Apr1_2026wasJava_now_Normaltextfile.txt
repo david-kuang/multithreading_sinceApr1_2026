@@ -79,6 +79,8 @@ Sat Jul 4th 2026 AI_assistance.
 3. Microsoft copilot is being used in Company, I assume it's enterprise version.
 4. My company computer I'm using GitLab Duo chat, agents (Planner, Security Analysis, Data Analysis) almost every day. 
 5. Thanks for UW student, try Claude code out if applicable. 
+6. Related to Spring/SpringBoot projects, there're Spring AI=https://spring.io/projects/spring-ai
+and Spring LDAP=https://spring.io/projects/spring-ldap
 
 
 

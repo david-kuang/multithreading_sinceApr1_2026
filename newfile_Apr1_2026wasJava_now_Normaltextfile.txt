@@ -73,7 +73,12 @@ Math or Mathematica  > factor(X^2-x-2)  Expection: (x-2)(x+1)
 > f(t)+f(1) ; <enter>                   /*that means tpower(3)-2tpower(2)-12t-11
 > plot(f(x), x=-4..5);   
 link1=https://www.symbolab.com/graphing-calculator   or https://www.symbolab.com/solver/calculus-calculator
-
+Sat Jul 4th 2026 AI_assistance. 
+1. Personally, I've been using chatgpt
+2. Personally, my new MacBook has opencode 
+3. Microsoft copilot is being used in Company, I assume it's enterprise version.
+4. My company computer I'm using GitLab Duo chat, agents (Planner, Security Analysis, Data Analysis) almost every day. 
+5. Thanks for UW student, try Claude code out if applicable. 
 
 
 

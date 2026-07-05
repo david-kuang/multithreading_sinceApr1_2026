@@ -81,6 +81,10 @@ Sat Jul 4th 2026 AI_assistance.
 5. Thanks for UW student, try Claude code out if applicable. 
 6. Related to Spring/SpringBoot projects, there're Spring AI=https://spring.io/projects/spring-ai
 and Spring LDAP=https://spring.io/projects/spring-ldap
-
+Sun Jul 5th 2026 
+Review opencode that's installed already, up and running in my MacBook. 
+Step1. Download opencode desktop app [macOS (Apple Silicon)] via website https://opencode.ai/download
+Step2. Install OpenCode desktop app. Once it's installed successfully, its icon can be found via Go=>Applicatinos=>OpenCode
+Step3. Build
 
 

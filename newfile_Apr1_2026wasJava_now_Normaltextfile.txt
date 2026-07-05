@@ -86,5 +86,49 @@ Review opencode that's installed already, up and running in my MacBook.
 Step1. Download opencode desktop app [macOS (Apple Silicon)] via website https://opencode.ai/download
 Step2. Install OpenCode desktop app. Once it's installed successfully, its icon can be found via Go=>Applicatinos=>OpenCode
 Step3. Build
+How about Claude Code desktop app?
+Step1. Download Claude.dmg from https://claude.ai/login
+Step2. Copy Claude.dmg to Applications thats to complete Claude desktop app installation on MacBook
+Step3. Go to Applications, find icon Claude, click it to launch Claude desktop app
+https://code.claude.com/docs/
+1Automate the work you keep putting off
+2Build features and fix bugs
+3Create commits and pull requests
+4Connect your tools with MCP
+5Customize with instructions, skills, and hooks
+6Run agent teams and build custom agents 
+7_ Pipe, script, and automate with the CLI
+8Schedule recurring tasks
+9Work from anywhere
+10I want to ...
+Continue a local session from my phone or another device
+Push events from Telegram, Discord, iMessage, or my own webhooks into a session
+Start a task locally, continue on mobile
+Run Claude on a recurring schedule
+Automate PR reviews and issue triage
+Get automatic code review from Slack to pull requests
+Debug live web applications
+Build custom agents for your own workflows
+
+Example:Google Claude code halloworld
+1Direct Prompting Method
+make me a simple webpage that says hello world
+add a hello world function to the main file
+
+2Building a Hello World App fomr Scratch
+Step1. Open your project folder in your standard terminal or inside VS Code. 
+Step2. Start Claude Code by executing 
+bash
+claude
+Step3. Provide the framework prompt to build your fist API. 
+Prompt: Initialize a Node.js project with Express. Create a server with a GET /api/hello route that returns {"message":"Hello world}. Add an appropriate .gitignore file.
+Step4. Approve the automated changes by pressing y when Claude prompts you to install dependencies (npm install express) and write the files (package.json, server.js)
+Step5. Launch the application directly from the chat by asking:
+Prompt: Start the app so I can view it locally in a browser.
+
+3Common Slash Commands.
+While experiencing with your first "Hello World" sandbox, you can control the terminal agent session using these essential built-in commands: 
+/clear - Clears the screen and resets the conversational context thread.
+/compact - Compresses the discussion history to save token limits.
 
 

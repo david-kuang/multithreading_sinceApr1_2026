@@ -29,7 +29,7 @@ public class IgniteDemoApplication {
         Boolean getBooleanIsPersistenceEnabled = drc.isPersistenceEnabled();
         System.out.printf("Is DataRegionConfiguratrion PersistenceEnabled by default? %s;\n", getBooleanIsPersistenceEnabled);
         if (!getBooleanIsPersistenceEnabled) {
-            //drc.setPersistenceEnabled(true);
+            drc.setPersistenceEnabled(true);
             System.out.printf("Set/Changed drc.isPersistenceEnabled() into %s.\n", drc.isPersistenceEnabled());
         }
         DataStorageConfiguration dsc = new DataStorageConfiguration();
@@ -55,6 +55,7 @@ public class IgniteDemoApplication {
     @Bean
     public ApplicationRunner applicationRunner(Ignite ignite) {
         return args -> {
+            checkIGNITE_LOCAL_HOST(ignite);
             IgniteCache<String, String> cache = ignite.getOrCreateCache("dummy");
             //IgniteCache<String, String> cache9 = ignite.getOrCreateCache("cacheNumNine");
             //cache9.set
@@ -64,6 +65,14 @@ public class IgniteDemoApplication {
             cache.put("tdevyk3", "ykuang@mtb.comAsOfJun18_2026");*/
             System.out.printf("cache.get(\"key1\") = %s, cache.get(\"tdevyk3\") = %s !\n", cache.get("key1"), cache.get("tdevyk3"));
         };
+    }
+
+    private static void checkIGNITE_LOCAL_HOST(Ignite ignite) {
+        System.out.println("ENV IGNITE_LOCAL_HOST = " + System.getenv("IGNITE_LOCAL_HOST"));
+
+        System.out.println("JVM IGNITE_LOCAL_HOST = " + System.getProperty("IGNITE_LOCAL_HOST"));
+
+        System.out.println("Ignite localHost = " + ignite.configuration().getLocalHost());
     }
 
     private CacheConfiguration getCacheConfiguration() {

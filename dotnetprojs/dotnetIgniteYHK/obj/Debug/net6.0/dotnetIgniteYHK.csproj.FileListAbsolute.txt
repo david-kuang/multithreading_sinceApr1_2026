@@ -1,0 +1,15 @@
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\bin\Debug\net6.0\dotnetIgniteYHK.exe
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\bin\Debug\net6.0\dotnetIgniteYHK.deps.json
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\bin\Debug\net6.0\dotnetIgniteYHK.runtimeconfig.json
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\bin\Debug\net6.0\dotnetIgniteYHK.dll
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\bin\Debug\net6.0\dotnetIgniteYHK.pdb
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\dotnetIgniteYHK.csproj.AssemblyReference.cache
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\dotnetIgniteYHK.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\dotnetIgniteYHK.AssemblyInfoInputs.cache
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\dotnetIgniteYHK.AssemblyInfo.cs
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\dotnetIgniteYHK.csproj.CoreCompileInputs.cache
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\dotnetIgniteYHK.dll
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\refint\dotnetIgniteYHK.dll
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\dotnetIgniteYHK.pdb
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\dotnetIgniteYHK.genruntimeconfig.cache
+C:\Users\David\github_com\multithreading_sinceApr1_2026\dotnetprojs\dotnetIgniteYHK\obj\Debug\net6.0\ref\dotnetIgniteYHK.dll

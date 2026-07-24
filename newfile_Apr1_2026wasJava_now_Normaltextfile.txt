@@ -137,4 +137,8 @@ how to automate the newly-built JARs on test_aa for example.
 2-java thick-client-jar how to add into/remove from CLASSPATH on zdih-app-utils-3.1.1.jar, log4j.jar spring; spring-ignite
 Use a demo springboot java app to demo if applicable. 
 
+Thu Jul 23rd 2026DOTNET-SDK, currently dotnet-v8.0 v9.0 v10.0 My box with previous edition of dotnet
+
+
+
 

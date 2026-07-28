@@ -138,6 +138,14 @@ how to automate the newly-built JARs on test_aa for example.
 Use a demo springboot java app to demo if applicable. 
 
 Thu Jul 23rd 2026DOTNET-SDK, currently dotnet-v8.0 v9.0 v10.0 My box with previous edition of dotnet
+Mon Jul 27th 2026 https://dotnet.microsoft.com/en-us/download/visual-studio-sdks
+.NET/.NET Core
+.NET is a free, cross-platform, open-source developer platform for building many different types of applications.
+Supported versoins.
+Version    Release type        Support phase    VisualStudio2026 SDK    VisualStudio2022SDK    Runtime(Windows)    Releasenotes Endofsupport
+.NET11.0   Standard Term Support Preview        N/A                      N/A                    x64/x86            Releasenotes 
+
+
 
 
 

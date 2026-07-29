@@ -144,7 +144,10 @@ Mon Jul 27th 2026 https://dotnet.microsoft.com/en-us/download/visual-studio-sdks
 Supported versoins.
 Version    Release type        Support phase    VisualStudio2026 SDK    VisualStudio2022SDK    Runtime(Windows)    Releasenotes Endofsupport
 .NET11.0   Standard Term Support Preview        N/A                      N/A                    x64/x86            Releasenotes 
-
+Wed Jul 29th 2026
+1DOTNET documentation url=https://learn.microsoft.com/en-us/dotnet/
+2GITLAB documentation (docs)=https://docs.gitlab.com/     specifically on CI/CD, the link is https://docs.gitlab.com/ci/yaml/ topic of CI/CD YAML syntax reference
+3If don't know which direction you will go for, go forward, like weekday, go office
 
 
 

@@ -241,5 +241,298 @@ SingleStore is a strong choice if SQL performance and analytics are the priority
 GridGain is the natural choice if you like Ignite but need enterprise features and commercial support.
 
 If you can share your specific Ignite use case—for example, distributed caching, SQL, 
+Tue Aug 11th 2026
+1ODBC Ignite Driver, how to install.
+1(1)To install the Apache Ignite ODBC driver on Windows, run the pre-built .msi installer package or execute the manual install script from %IGNITE_HOME%/platforms/cpp/odbc/install. 
+On Linux, build the driver from source using CMake and register it via odbcinst with ignite-odbc-install.ini.
+
+(2)Windows Installation
+. Using MSI: Run ignite-odbc-amd64.msi (64-bit) or ignite-odbc-x86.msi (32-bit).
+. Manual Script: Place the driver DLL in your chosen folder, verify dependencies are in %PATH%, and run the setup script inside %IGNITE_HOME%/platforms/cpp/odbc/install
+ .Configure DSN: Open the ODBC Data Source Administrator (odbcad32 or odbc64), click Add, select Apache Ignite, and complete your connection settings.
+
+(3)Linux Installation
+. Prerequisites: Install CMake (3.6+), GCC/Clang, OpenSSL, and unixODBC
+. Build Driver: Navigate to $IGNITE_HOME/platforms/cpp, create a build folder, run cmake .. -DWITH_ODBC=ON, and build/install using cmake --build . --target install
+. Register Driver: Verify shared library links with ldd /usr/local/lib/libignite-odbc.so
+. Install INI: Update the file path in $IGNITE_HOME/platforms/cpp/odbc/install/ignite-odbc-install.ini
+. Register with System: Run sudo odbcinst -i -d -f $IGNITE_HOME/platforms/cpp/odbc/install/ignite-odbc-install.ini.
+{Ignite ODBC driver install }{If you mean **installing the Apache Ignite ODBC driver**, the steps depend on whether you are using **Ignite 2.x or Ignite 3.x**.
+
+Since you've previously worked with **GridGain/Apache Ignite and Java**, I suspect you may be using **Ignite 2.x**.
+
+### Apache Ignite 2.x — ODBC installation
+
+The Ignite 2 ODBC driver is a native driver used by applications such as **Excel, Power BI, Python, C/C++, and other ODBC clients**. The driver name is:
+
+```text
+Apache Ignite
+```
+
+and the typical connection string is:
+
+```text
+DRIVER={Apache Ignite};ADDRESS=localhost:10800
+```
+
+([Apache Ignite][1])
+
+#### Windows
+
+1. Download the Apache Ignite 2.x distribution from the [Apache Ignite Downloads page](https://ignite.apache.org/download.cgi?utm_source=chatgpt.com).
+2. Locate the ODBC driver in the Ignite distribution.
+3. Install the appropriate **64-bit ODBC driver** for a 64-bit application.
+4. Open:
+
+```text
+ODBC Data Sources (64-bit)
+```
+
+5. Go to **System DSN → Add**.
+6. Select:
+
+```text
+Apache Ignite
+```
+
+7. Configure:
+
+```text
+Server/Address: localhost
+Port: 10800
+```
+
+8. Test the connection.
+
+Apache's documentation specifically notes that Windows DSNs are configured through the ODBC Data Source Administrator (`odbcad32`/64-bit ODBC administrator). ([Apache Ignite][1])
+
+### Important: Ignite server port
+
+For Ignite 2.x, the SQL/ODBC endpoint normally listens on:
+
+```text
+10800
+```
+
+So if your Ignite node is running locally, the basic connection is:
+
+```text
+DRIVER={Apache Ignite};ADDRESS=localhost:10800
+```
+
+([Apache Ignite][2])
+
+### Linux
+
+If you're installing on Linux with `unixODBC`, you typically configure:
+
+```text
+/etc/odbcinst.ini
+/etc/odbc.ini
+```
+
+You can find the active ODBC configuration locations with:
+
+```bash
+odbcinst -j
+```
+
+Then define a DSN such as:
+
+```ini
+[Ignite]
+description=Apache Ignite
+driver=Apache Ignite
+ADDRESS=localhost:10800
+```
+
+([Apache Ignite][1])
+
+### If you are using Ignite 3
+
+This is different. Ignite 3 has a newer ODBC driver and the driver name is:
+
+```text
+Apache Ignite 3
+```
+
+For example:
+
+```text
+DRIVER={Apache Ignite 3};ADDRESS=localhost:10800
+```
+
+([Apache Ignite][3])
+
+**If you tell me your environment — e.g. `Ignite 2.17/2.18 + Windows`, `GridGain`, or `Linux` — I can give you the exact ODBC driver installation commands and DSN configuration.**
+
+[1]: https://ignite.apache.org/docs/ignite2/latest/SQL/ODBC/connection-string-dsn?utm_source=chatgpt.com "Connection String and DSN | Ignite Documentation"
+[2]: https://ignite.apache.org/docs/ignite2/latest/SQL/JDBC/jdbc-driver?utm_source=chatgpt.com "JDBC Driver | Ignite Documentation"
+[3]: https://ignite.apache.org/docs/ignite3/latest/developers-guide/sql/odbc/connection-string?utm_source=chatgpt.com "Connection String | Ignite Documentation"
+}
+{Ignite 2.17 Ignite ODBC driver install }
+{Yes. For **Apache Ignite 2.17.0**, the ODBC driver is included with the Ignite distribution. You normally **do not need to build it yourself on Windows**; Apache provides pre-built 32-bit and 64-bit MSI installers. ([Apache Ignite][1])
+
+### 1. Download Ignite 2.17.0
+
+Use the official Apache Ignite 2.17.0 binary:
+
+[Apache Ignite 2.17.0 Downloads](https://ignite.apache.org/download.cgi?utm_source=chatgpt.com)
+
+Download:
+
+```text
+apache-ignite-2.17.0-bin.zip
+```
+
+Apache lists **2.17.0** as an Ignite 2 binary release. ([Apache Ignite][2])
+
+After extracting, for example:
+
+```text
+C:\apache-ignite-2.17.0
+```
+
+set:
+
+```text
+IGNITE_HOME=C:\apache-ignite-2.17.0
+```
+
+### 2. Find the ODBC installer
+
+Inside Ignite 2.17.0, look for:
+
+```text
+C:\apache-ignite-2.17.0\platforms\cpp\bin\odbc\
+```
+
+You should have:
+
+```text
+ignite-odbc-amd64.msi
+ignite-odbc-x86.msi
+```
+
+For a normal **64-bit Windows + 64-bit application**, install:
+
+```text
+ignite-odbc-amd64.msi
+```
+
+Apache recommends installing the appropriate Microsoft Visual C++ 2010 Redistributable before the MSI. ([Apache Ignite][1])
+
+### 3. Install the driver
+
+Run:
+
+```cmd
+ignite-odbc-amd64.msi
+```
+
+as Administrator.
+
+After installation, open:
+
+```text
+ODBC Data Sources (64-bit)
+```
+
+or run:
+
+```cmd
+C:\Windows\System32\odbcad32.exe
+```
+
+Then go to:
+
+```text
+System DSN
+    → Add
+        → Apache Ignite
+```
+
+Apache's Ignite 2 documentation confirms that the driver is registered through the Windows ODBC Data Source Administrator. ([Apache Ignite][3])
+
+### 4. Configure the Ignite connection
+
+For example, if your Ignite server is running on:
+
+```text
+127.0.0.1:10800
+```
+
+use:
+
+```text
+DRIVER={Apache Ignite};ADDRESS=127.0.0.1:10800
+```
+
+You can also specify a cache:
+
+```text
+DRIVER={Apache Ignite};ADDRESS=127.0.0.1:10800;CACHE=MyCache
+```
+
+The standard Ignite 2 ODBC port is provided by the **client connector** configuration; `10800` is the default. ([Apache Ignite][3])
+
+### 5. Verify the driver
+
+From a command prompt:
+
+```cmd
+odbcad32.exe
+```
+
+Go to:
+
+```text
+Drivers
+```
+
+You should see:
+
+```text
+Apache Ignite
+```
+
+with the appropriate 64-bit driver.
+
+### 6. Test with Python / pyodbc
+
+If your goal is to access Ignite 2.17 from Python:
+
+```bash
+pip install pyodbc
+```
+
+Then:
+
+```python
+import pyodbc
+
+conn = pyodbc.connect(
+    "DRIVER={Apache Ignite};"
+    "ADDRESS=127.0.0.1:10800;"
+)
+
+cursor = conn.cursor()
+
+cursor.execute("SELECT * FROM MyTable")
+
+for row in cursor.fetchall():
+    print(row)
+```
+
+**One important Ignite 2.17 detail:** ODBC SQL access depends on the cache having appropriate `QueryEntity`/SQL field configuration. It isn't enough for arbitrary Java objects to simply exist in the cache. ([Apache Ignite][4])
+
+If you're installing this on **Windows**, I can also give you the exact **Ignite 2.17 → ODBC → DSN → Python/Excel** setup, including how to check whether the **10800 client connector port** is actually enabled.
+
+[1]: https://ignite.apache.org/docs/ignite2/latest/SQL/ODBC/odbc-driver?utm_source=chatgpt.com "ODBC Driver | Ignite Documentation"
+[2]: https://ignite.apache.org/download.cgi?utm_source=chatgpt.com "Download - Apache Ignite"
+[3]: https://ignite.apache.org/docs/ignite2/latest/SQL/ODBC/connection-string-dsn?utm_source=chatgpt.com "Connection String and DSN | Ignite Documentation"
+[4]: https://ignite.apache.org/docs/ignite2/latest/SQL/ODBC/querying-modifying-data?utm_source=chatgpt.com "Querying and Modifying Data | Ignite Documentation"
+}
+2Pretend visiting（神游）New Brunswick, Nova Scotia, and PEI (Prince Edwards Island). 
 compute grid, streaming, or running GridGain in production—I can provide a more targeted 
 comparison, including migration effort, performance trade-offs, andlicensing considerations.}

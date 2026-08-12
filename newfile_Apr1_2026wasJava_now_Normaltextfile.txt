@@ -534,6 +534,8 @@ If you're installing this on **Windows**, I can also give you the exact **Ignite
 [4]: https://ignite.apache.org/docs/ignite2/latest/SQL/ODBC/querying-modifying-data?utm_source=chatgpt.com "Querying and Modifying Data | Ignite Documentation"
 }
 ignite-odbc-amd64.msi Windows Installer Package under folder apache-ignite-2.17.0-bin/platforms/cpp/bin/odbc 
+youtube.com link1=https://www.youtube.com/watch?v=tUiaK5fRH7k How to Configure ODBC to Access a Microsoft SQL Server 
+
 
 2Pretend visiting（神游）New Brunswick, Nova Scotia, and PEI (Prince Edwards Island). 
 compute grid, streaming, or running GridGain in production—I can provide a more targeted 

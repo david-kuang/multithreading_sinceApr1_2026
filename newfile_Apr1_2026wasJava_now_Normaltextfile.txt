@@ -540,3 +540,127 @@ youtube.com link1=https://www.youtube.com/watch?v=tUiaK5fRH7k How to Configure O
 2Pretend visiting（神游）New Brunswick, Nova Scotia, and PEI (Prince Edwards Island). 
 compute grid, streaming, or running GridGain in production—I can provide a more targeted 
 comparison, including migration effort, performance trade-offs, andlicensing considerations.}
+Mon Aug 17th 2026
+OpenCode-whatever-model-mainframecoding 
+{OpenCode mainframe coding by using example}
+{If by **OpenCode** you mean **OpenCode AI coding/agent tools**, I can show you how to use it to work with **mainframe code**, 
+especially COBOL, JCL, and copybooks.
+For example, suppose you have this COBOL program:
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. CALC-INTEREST.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  PRINCIPAL      PIC 9(7)V99.
+       01  RATE           PIC 9V99.
+       01  INTEREST       PIC 9(7)V99.
+
+       PROCEDURE DIVISION.
+           DISPLAY "ENTER PRINCIPAL: ".
+           ACCEPT PRINCIPAL.
+
+           DISPLAY "ENTER RATE: ".
+           ACCEPT RATE.
+
+           COMPUTE INTEREST = PRINCIPAL * RATE / 100.
+
+           DISPLAY "INTEREST = " INTEREST.
+
+           STOP RUN.
+```
+
+### Using OpenCode to modify it
+
+You could give OpenCode a request such as:
+
+> **"Analyze this COBOL program. Add validation so that PRINCIPAL and RATE cannot be negative. Explain the changes and provide the updated COBOL code."**
+
+An AI coding agent could produce something like:
+
+```cobol
+       PROCEDURE DIVISION.
+           DISPLAY "ENTER PRINCIPAL: ".
+           ACCEPT PRINCIPAL.
+
+           IF PRINCIPAL < 0
+               DISPLAY "ERROR: PRINCIPAL CANNOT BE NEGATIVE"
+               STOP RUN
+           END-IF.
+
+           DISPLAY "ENTER RATE: ".
+           ACCEPT RATE.
+
+           IF RATE < 0
+               DISPLAY "ERROR: RATE CANNOT BE NEGATIVE"
+               STOP RUN
+           END-IF.
+
+           COMPUTE INTEREST = PRINCIPAL * RATE / 100.
+
+           DISPLAY "INTEREST = " INTEREST.
+
+           STOP RUN.
+```
+
+### A more realistic mainframe example
+
+A typical OpenCode + mainframe project might contain:
+
+```text
+mainframe-project/
+├── cobol/
+│   ├── CUSTOMER.cbl
+│   ├── ACCOUNT.cbl
+│   └── INTEREST.cbl
+├── copybook/
+│   ├── CUSTOMER-REC.cpy
+│   └── ACCOUNT-REC.cpy
+├── jcl/
+│   ├── COMPILE.jcl
+│   └── RUN.jcl
+└── README.md
+```
+
+You can ask the coding agent to do higher-level work, for example:
+
+> "Find where CUSTOMER-REC is used throughout the COBOL programs. Explain the data flow and identify all programs that modify CUSTOMER-BALANCE."
+
+Or:
+
+> "Convert this COBOL batch program to Java while preserving the business logic. First explain the COBOL logic, then create the Java equivalent."
+
+Or:
+
+> "Analyze this JCL job and explain each step, dataset, DD statement, and program being executed."
+
+### OpenCode can be particularly useful for legacy modernization
+
+A practical workflow is:
+
+**COBOL/JCL → AI analysis → tests → refactoring → Java/Python modernization**
+
+For example:
+
+```text
+COBOL
+  │
+  ├── Identify business rules
+  ├── Identify files / DB2 tables
+  ├── Identify copybooks
+  ├── Analyze JCL
+  │
+  ▼
+OpenCode
+  │
+  ├── Generate documentation
+  ├── Add tests
+  ├── Refactor COBOL
+  └── Generate Java/Python equivalent
+  │
+  ▼
+Modern application
+```
+If you mean a **specific product called OpenCode** (for example **OpenCode.dev / OpenCode CLI**), tell me which one you're using, and I can give you a **step-by-step setup and a real COBOL + JCL example**, including the commands to run it.
+}
+

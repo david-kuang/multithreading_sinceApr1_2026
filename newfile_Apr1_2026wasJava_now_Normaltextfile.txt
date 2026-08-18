@@ -663,4 +663,6 @@ Modern application
 ```
 If you mean a **specific product called OpenCode** (for example **OpenCode.dev / OpenCode CLI**), tell me which one you're using, and I can give you a **step-by-step setup and a real COBOL + JCL example**, including the commands to run it.
 }
+Tue Aug 18th 2026
+.google 'Moonlight Kimi K3'=https://www.google.com/search?q=Moonlight+Kimi+K3&sca_esv=5dcec58ab3c3b762&sxsrf=APpeQnvlLZrJ7hHrIwl2i-yvh8pjxNK68g%3A1787077086691&source=hp&ei=3qGEapi8J626ruEPtPqxyQU&iflsig=ABILxe8AAAAAaoSv7sMIJAWcrIcenWpND1ufS8wkkPbq&ved=0ahUKEwiYo7735KqWAxUtnSsGHTR9LFkQ4dUDCBk&uact=5&oq=Moonlight+Kimi+K3&gs_lp=Egdnd3Mtd2l6IhFNb29ubGlnaHQgS2ltaSBLMzIIEAAYFhgeGAoyBhAAGBYYHjIIEAAYgAQYogQyBRAAGO8FMgUQABjvBTIFEAAY7wUyBRAAGO8FSIg0UABYuDJwAngAkAEAmAHGAaABjRGqAQQ0LjE1uAEDyAEA-AEBmAIVoAL_EsICBBAjGCfCAgsQABiABBixAxiDAcICCxAuGIAEGLEDGIMBwgIOEC4YgAQYigUYsQMYgwHCAg4QABiABBiKBRixAxiDAcICCBAAGIAEGLEDwgIIEC4YgAQYsQPCAgUQABiABMICCxAAGIAEGLEDGMkDwgILEAAYgAQYigUYkgPCAgsQABiABBiKBRixA8ICCBAuGLEDGIAEwgILEC4YgAQYxwEYrwHCAgUQLhiABMICDhAuGIAEGMcBGK8BGI4FwgIIEC4YgAQY5QTCAgwQLhiABBgKGAsYsQPCAgwQLhgKGAsYsQMYgATCAgkQABiABBgKGAvCAgsQABiABBiKBRiGA5gDAJIHBjMuMTcuMaAHy9sBsgcGMS4xNy4xuAfvEsIHCDItMTIuOC4xyAe4AYAIAQ&sclient=gws-wiz
 

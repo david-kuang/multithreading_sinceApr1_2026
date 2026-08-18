@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Importance of Water in Life</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-dark: #0c2d48;
+      --blue-mid: #145da0;
+      --blue-light: #2e8bc0;
+      --blue-pale: #b1d4e0;
+      --white: #ffffff;
+      --off-white: #f0f8ff;
+      --accent: #00b4d8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--blue-dark);
+      background: var(--off-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Animated water background for hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 50%, var(--blue-light) 100%);
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23f0f8ff' d='M0,64L48,58.7C96,53,192,43,288,48C384,53,480,75,576,80C672,85,768,75,864,64C960,53,1056,43,1152,48C1248,53,1344,75,1392,85.3L1440,96V120H0Z'/%3E%3C/svg%3E") no-repeat bottom;
+      background-size: cover;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      max-width: 700px;
+      padding: 0 1.5rem;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .hero .drop-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-btn {
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      border: 2px solid var(--white);
+      border-radius: 30px;
+      background: transparent;
+      color: var(--white);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .scroll-btn:hover {
+      background: var(--white);
+      color: var(--blue-mid);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      background: rgba(12, 45, 72, 0.9);
+      backdrop-filter: blur(8px);
+      transform: translateY(-100%);
+      transition: transform 0.4s;
+    }
+
+    nav.visible { transform: translateY(0); }
+
+    nav a {
+      color: var(--blue-pale);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: var(--white); }
+
+    /* ── Sections ── */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      margin-bottom: 1rem;
+      color: var(--blue-mid);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      color: #555;
+    }
+
+    /* ── Stats counter ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem 1rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover { transform: translateY(-6px); }
+
+    .stat-card .number {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-card .label {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    /* ── Benefits grid ── */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .benefit-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+      border-top: 4px solid var(--accent);
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .benefit-card.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+    }
+
+    .benefit-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .benefit-card h3 {
+      margin-bottom: 0.6rem;
+      color: var(--blue-dark);
+    }
+
+    .benefit-card p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    /* ── Facts carousel ── */
+    .facts-section {
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-dark));
+      color: var(--white);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .facts-section .section-title { color: var(--white); }
+    .facts-section .section-subtitle { color: var(--blue-pale); }
+
+    .fact-display {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .fact-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .fact-nav button {
+      padding: 0.6rem 1.6rem;
+      border: none;
+      border-radius: 30px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .fact-nav button:hover { background: var(--blue-light); }
+
+    /* ── Water usage interactive ── */
+    .usage-section {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      max-width: 900px;
+      margin: 0 auto 4rem;
+    }
+
+    .usage-bars { max-width: 600px; margin: 0 auto; }
+
+    .usage-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .usage-item .usage-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .bar-track {
+      height: 14px;
+      background: var(--blue-pale);
+      border-radius: 7px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue-light), var(--accent));
+      border-radius: 7px;
+      transition: width 1.2s ease-out;
+    }
+
+    /* ── Tips section ── */
+    .tips-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .tips-list li {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: transform 0.3s;
+    }
+
+    .tips-list li:hover { transform: translateY(-3px); }
+
+    .tips-list li .tip-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Water pledge ── */
+    .pledge-section {
+      text-align: center;
+      background: linear-gradient(135deg, var(--blue-pale) 0%, var(--off-white) 100%);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .pledge-btn {
+      margin-top: 1.5rem;
+      padding: 0.9rem 2.5rem;
+      border: none;
+      border-radius: 30px;
+      background: var(--blue-mid);
+      color: var(--white);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .pledge-btn:hover {
+      background: var(--blue-dark);
+      transform: scale(1.05);
+    }
+
+    .pledge-count {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .pledge-msg {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: var(--blue-mid);
+      display: none;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--blue-dark);
+      color: var(--blue-pale);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      section { padding: 3.5rem 1rem; }
+      .facts-section, .usage-section, .pledge-section { margin-left: 1rem; margin-right: 1rem; padding: 2rem 1rem; }
+      nav { gap: 1rem; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#stats">Facts</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#facts">Did You Know</a>
+    <a href="#usage">Usage</a>
+    <a href="#tips">Tips</a>
+    <a href="#pledge">Pledge</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="drop-icon">💧</div>
+    <h1>The Importance of Water</h1>
+    <p>Water is the essence of life. Every cell, tissue, and organ in your body needs water to work properly. Explore why water is our most precious resource.</p>
+    <button class="scroll-btn" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">Explore Below</button>
+  </header>
+
+  <!-- Stats -->
+  <section id="stats">
+    <h2 class="section-title">Water By The Numbers</h2>
+    <p class="section-subtitle">The statistics behind our planet's most vital resource</p>
+    <div class="stats">
+      <div class="stat-card">
+        <div class="number" data-target="71">0</div>
+        <div class="label">% of Earth's surface covered by water</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" data-target="60">0</div>
+        <div class="label">% of the human body is water</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" data-target="3">0</div>
+        <div class="label">Litres of water needed daily per person</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" data-target="2">0</div>
+        <div class="label">Billion people lack safe drinking water</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefits">
+    <h2 class="section-title">Why Water Matters</h2>
+    <p class="section-subtitle">Water plays a critical role in nearly every function of the human body and the planet</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="icon">🧠</div>
+        <h3>Brain Function</h3>
+        <p>Your brain is roughly 75% water. Staying hydrated improves concentration, memory, and mood. Even mild dehydration can impair cognitive performance.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">❤️</div>
+        <h3>Heart Health</h3>
+        <p>Water helps regulate blood pressure and heart rate. Proper hydration keeps blood flowing efficiently and reduces strain on the cardiovascular system.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">💪</div>
+        <h3>Physical Performance</h3>
+        <p>Muscles are about 80% water. Dehydration leads to reduced endurance, increased fatigue, and cramping during physical activity.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">🌡️</div>
+        <h3>Temperature Regulation</h3>
+        <p>Sweating and respiration release water to cool the body. Without adequate water intake, your body can overheat dangerously.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">🫁</div>
+        <h3>Digestion &amp; Detox</h3>
+        <p>Water aids digestion, dissolves nutrients, and flushes toxins through the kidneys. It prevents constipation and supports liver function.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">🌱</div>
+        <h3>Ecosystems &amp; Agriculture</h3>
+        <p>Freshwater sustains all terrestrial ecosystems. Agriculture accounts for 70% of global freshwater use, making water essential for food security.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fun Facts -->
+  <div class="facts-section" id="facts">
+    <h2 class="section-title">Did You Know?</h2>
+    <p class="section-subtitle">Fascinating facts about water</p>
+    <div class="fact-display" id="factDisplay"></div>
+    <div class="fact-nav">
+      <button onclick="prevFact()">← Prev</button>
+      <button onclick="nextFact()">Next →</button>
+    </div>
+  </div>
+
+  <!-- Water Usage -->
+  <div class="usage-section" id="usage">
+    <h2 class="section-title">Daily Water Footprint</h2>
+    <p class="section-subtitle">How much water does it take to produce everyday items?</p>
+    <div class="usage-bars">
+      <div class="usage-item">
+        <div class="usage-label"><span>🥩 1 kg of Beef</span><span>15,400 L</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="100"></div></div>
+      </div>
+      <div class="usage-item">
+        <div class="usage-label"><span>👕 1 Cotton T-Shirt</span><span>2,700 L</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="17.5"></div></div>
+      </div>
+      <div class="usage-item">
+        <div class="usage-label"><span>📱 1 Smartphone</span><span>12,760 L</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="82.8"></div></div>
+      </div>
+      <div class="usage-item">
+        <div class="usage-label"><span>☕ 1 Cup of Coffee</span><span>132 L</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="0.9"></div></div>
+      </div>
+      <div class="usage-item">
+        <div class="usage-label"><span>📄 1 Sheet of A4 Paper</span><span>10 L</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="0.07"></div></div>
+      </div>
+      <div class="usage-item">
+        <div class="usage-label"><span>🍎 1 kg of Apples</span><span>822 L</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="5.3"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <section id="tips">
+    <h2 class="section-title">Save Water Every Day</h2>
+    <p class="section-subtitle">Simple actions that make a big difference</p>
+    <ul class="tips-list">
+      <li><span class="tip-icon">🚿</span><div><strong>Take shorter showers</strong><br>Reducing your shower by 2 minutes saves up to 40 litres of water.</div></li>
+      <li><span class="tip-icon">🚰</span><div><strong>Fix leaking taps</strong><br>A dripping tap can waste over 20,000 litres per year.</div></li>
+      <li><span class="tip-icon">🥤</span><div><strong>Use a reusable bottle</strong><br>Plastic bottle production uses 3 litres of water per litre of bottled water.</div></li>
+      <li><span class="tip-icon">🌧️</span><div><strong>Collect rainwater</strong><br>Use it for gardening and reduce your municipal water use.</div></li>
+      <li><span class="tip-icon">🍽️</span><div><strong>Run full loads</strong><br>Dishwashers and washing machines are most efficient when full.</div></li>
+      <li><span class="tip-icon">🌿</span><div><strong>Water plants wisely</strong><br>Water early morning or late evening to reduce evaporation.</div></li>
+    </ul>
+  </section>
+
+  <!-- Pledge -->
+  <div class="pledge-section" id="pledge">
+    <h2 class="section-title">Take the Water Pledge 💧</h2>
+    <p class="section-subtitle">Commit to saving water and protecting this precious resource</p>
+    <button class="pledge-btn" id="pledgeBtn" onclick="makePledge()">I Pledge to Save Water!</button>
+    <div class="pledge-count" id="pledgeCount"></div>
+    <div class="pledge-msg" id="pledgeMsg">Thank you! Every drop counts. Together we can make a difference. 🌊</div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>💧 Water is life. Conserve it. Protect it. Share it.</p>
+    <p style="margin-top:0.5rem;">Made with care for our planet</p>
+  </footer>
+
+  <script>
+    // ── Sticky nav ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // ── Stat counter animation ──
+    function animateCounters() {
+      document.querySelectorAll('.stat-card .number').forEach(el => {
+        const target = +el.dataset.target;
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      });
+    }
+
+    // ── Intersection observer for cards, counters, bars ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        // Benefit cards
+        if (entry.target.classList.contains('benefit-card')) {
+          entry.target.classList.add('show');
+        }
+
+        // Stats counter
+        if (entry.target.id === 'stats') {
+          animateCounters();
+          observer.unobserve(entry.target);
+        }
+
+        // Usage bars
+        if (entry.target.id === 'usage') {
+          document.querySelectorAll('.bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.benefit-card').forEach(card => observer.observe(card));
+    observer.observe(document.getElementById('stats'));
+    observer.observe(document.getElementById('usage'));
+
+    // ── Facts carousel ──
+    const facts = [
+      "Hot water can freeze faster than cold water — a phenomenon known as the Mpemba effect.",
+      "Only 1% of the Earth's water is available for human use. The rest is saltwater or ice.",
+      "A person can survive about 3 weeks without food, but only about 3 days without water.",
+      "The average American uses about 300 gallons of water per day at home.",
+      "Water expands by about 9% when it freezes, which is why ice floats.",
+      "More people on Earth have a mobile phone than access to a toilet.",
+      "It takes about 2,000 litres of water to produce 1 kilogram of rice.",
+      "The human brain is 75% water, and a baby's body is about 78% water.",
+      "Agriculture uses 70% of the world's freshwater supply.",
+      "By 2025, two-thirds of the world's population may face water shortages."
+    ];
+
+    let factIndex = 0;
+    const factDisplay = document.getElementById('factDisplay');
+
+    function showFact() {
+      factDisplay.style.animation = 'none';
+      factDisplay.offsetHeight; // reflow
+      factDisplay.textContent = facts[factIndex];
+      factDisplay.style.animation = 'fadeIn 0.5s ease';
+    }
+
+    function nextFact() { factIndex = (factIndex + 1) % facts.length; showFact(); }
+    function prevFact() { factIndex = (factIndex - 1 + facts.length) % facts.length; showFact(); }
+
+    showFact();
+
+    // Auto-advance facts every 5s
+    setInterval(nextFact, 5000);
+
+    // ── Pledge counter (localStorage) ──
+    let pledgeCount = +(localStorage.getItem('water-pledge-count') || 847);
+    document.getElementById('pledgeCount').textContent = pledgeCount.toLocaleString() + ' people have pledged';
+
+    function makePledge() {
+      pledgeCount++;
+      localStorage.setItem('water-pledge-count', pledgeCount);
+      document.getElementById('pledgeCount').textContent = pledgeCount.toLocaleString() + ' people have pledged';
+      document.getElementById('pledgeMsg').style.display = 'block';
+      document.getElementById('pledgeBtn').disabled = true;
+      document.getElementById('pledgeBtn').textContent = '✓ Pledged!';
+      document.getElementById('pledgeBtn').style.background = '#2ecc71';
+    }
+
+    // Check if user already pledged
+    if (localStorage.getItem('water-pledged') === 'true') {
+      document.getElementById('pledgeBtn').disabled = true;
+      document.getElementById('pledgeBtn').textContent = '✓ Pledged!';
+      document.getElementById('pledgeBtn').style.background = '#2ecc71';
+      document.getElementById('pledgeMsg').style.display = 'block';
+    }
+
+    const origPledge = makePledge;
+    makePledge = function() {
+      localStorage.setItem('water-pledged', 'true');
+      origPledge();
+    };
+  </script>
+</body>
+</html>

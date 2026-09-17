@@ -669,6 +669,7 @@ Tue Aug 25th 2026 devVPC of TDEVYK3 with M&T Bank having OpenCode GitLab DUO Cla
 Tue Sep 15th 2026 Humanist AI. People matter more than AI. 
 Models. I'm using Claude Opus version 5. Environment. Opencode integrated with IDE, like Visual Studio Code or IntelliJ as well. 
 Humanist AI should be under control in all SDLC Software Development Life Cycle. Safety constraint matters.
-Thu Sep 17th 2026 
+Thu Sep 17th, 2026 
+1Setup opencode AI coding Agent=https://computingforgeeks.com/setup-opencode-ai-coding-agent/
 
 

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ask Socrates · MCP demo</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f7f3ea;--card:#fffdf8;--ink:#2a2622;--mute:#7a7266;--line:#e2dac8;--accent:#8a4b2a;--me:#efe4cf;--code:#f0ebdd}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1a17;--card:#25221e;--ink:#eee8dc;--mute:#a1988a;--line:#3a352e;--accent:#d99a6c;--me:#332d25;--code:#1a1815}}
+:root[data-theme="dark"]{--bg:#1c1a17;--card:#25221e;--ink:#eee8dc;--mute:#a1988a;--line:#3a352e;--accent:#d99a6c;--me:#332d25;--code:#1a1815}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,'Times New Roman',serif}
+.wrap{max-width:1000px;margin:0 auto;padding:16px;display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+@media(max-width:800px){.wrap{grid-template-columns:1fr}}
+h1{font-size:22px;margin:0}
+header{grid-column:1/-1}
+header p{margin:4px 0 0;color:var(--mute);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+#chat{height:60vh;min-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:4px}
+.m{padding:9px 12px;border-radius:10px;max-width:92%;white-space:pre-wrap}
+.m.s{background:var(--code);border:1px solid var(--line)}
+.m.u{background:var(--me);align-self:flex-end}
+.who{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:2px;font-family:system-ui,sans-serif}
+form{display:flex;gap:8px;margin-top:10px}
+input{flex:1;font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+button{font:14px system-ui,sans-serif;padding:10px 14px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+button:disabled{opacity:.5}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{background:transparent;color:var(--accent);border:1px solid var(--line);font-size:13px;padding:5px 10px}
+h2{font:600 12px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 8px}
+pre{margin:0;background:var(--code);border-radius:8px;padding:8px;font:12px/1.4 ui-monospace,Menlo,monospace;overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+.call{margin-bottom:8px}
+.call b{font:600 12px ui-monospace,monospace;color:var(--accent)}
+#side{display:flex;flex-direction:column;gap:16px}
+#trace,#ledger{max-height:240px;overflow-y:auto}
+.led{font-size:14px;margin:0 0 4px;font-family:system-ui,sans-serif}
+.note{font:12px system-ui,sans-serif;color:var(--mute);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Ask Socrates</h1>
+  <p>Bring a question. He won't answer it: he'll help you examine it. Each turn, he calls tools on a Socratic "MCP server" (right).</p>
+</header>
+
+<section class="card">
+  <div class="chips" id="chips"></div>
+  <div id="chat"></div>
+  <form id="f"><input id="q" placeholder="What is on your mind?" autocomplete="off"><button id="go">Ask</button></form>
+  <div class="note" id="status"></div>
+</section>
+
+<div id="side">
+  <section class="card"><h2>Tool calls (tools/call)</h2><div id="trace"><div class="note">Nothing yet.</div></div></section>
+  <section class="card"><h2>Inquiry ledger (server state)</h2><div id="ledger"><div class="note">Empty.</div></div></section>
+  <section class="card"><h2>Server manifest (tools/list)</h2>
+<pre>socratic-server v0.1
+- get_inquiry_state()
+- define_term(term, definition)
+- record_claim(claim, status)
+- log_counterexample(claim, counterexample)</pre>
+  <div class="note">Runs inside this page as an MCP-style tool server, called by Claude through the page's sampling capability. The same four tools can be exposed over real MCP (stdio).</div></section>
+</div>
+</div>
+
+<script>
+const SYS = `You are Socrates of Athens, distilled to his method. Rules:
+- Never lecture or hand over final answers. Use the elenchus: ask ONE probing question per turn, tied to what the person just said.
+- Expose hidden assumptions, ask for definitions ("what do you mean by X?"), and test claims with a counterexample or analogy (craftsmen, physicians, the city).
+- Feign modest ignorance ("I do not know, but let us look together"). Warm, playful irony, never cruel.
+- If the person is stuck or frustrated, give a small hint or a concrete example before asking again.
+- After a few turns, offer a brief summary of what has been established and what remains unclear.
+- Keep replies under 80 words. Plain text, no markdown.
+- TOOLS: on every turn first call get_inquiry_state. Then call define_term / record_claim / log_counterexample when the person defines a term, makes a claim, or you find a counterexample. Then reply.`;
+
+const ledger = {terms:{}, claims:[], counterexamples:[]};
+const turns = [];
+let sample = null;
+const $ = id => document.getElementById(id);
+
+const tools = [
+ {name:"get_inquiry_state", description:"Return the current ledger of defined terms, claims and counterexamples.",
+  inputSchema:{type:"object",properties:{}}, execute:()=>JSON.parse(JSON.stringify(ledger))},
+ {name:"define_term", description:"Record the person's working definition of a term.",
+  inputSchema:{type:"object",properties:{term:{type:"string"},definition:{type:"string"}},required:["term","definition"]},
+  execute:i=>{ledger.terms[i.term]=i.definition;return {ok:true};}},
+ {name:"record_claim", description:"Record a claim made by the person and its status.",
+  inputSchema:{type:"object",properties:{claim:{type:"string"},status:{type:"string",enum:["asserted","examined","refuted","accepted"]}},required:["claim","status"]},
+  execute:i=>{const c=ledger.claims.find(x=>x.claim===i.claim);if(c)c.status=i.status;else ledger.claims.push({claim:i.claim,status:i.status});return {ok:true};}},
+ {name:"log_counterexample", description:"Log a counterexample raised against a claim.",
+  inputSchema:{type:"object",properties:{claim:{type:"string"},counterexample:{type:"string"}},required:["claim","counterexample"]},
+  execute:i=>{ledger.counterexamples.push(i);return {ok:true};}}
+].map(t=>({...t, execute:(inp)=>{const out=t.execute(inp);trace(t.name,inp,out);renderLedger();return out;}}));
+
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+function trace(name,inp,out){
+  const t=$("trace"); if(t.querySelector(".note"))t.innerHTML="";
+  const d=el("div","call"); d.append(el("b","",name));
+  d.append(el("pre","",JSON.stringify({arguments:inp,result:out},null,1)));
+  t.prepend(d);
+}
+function renderLedger(){
+  const L=$("ledger"); L.innerHTML="";
+  const T=Object.entries(ledger.terms), C=ledger.claims, X=ledger.counterexamples;
+  if(!T.length&&!C.length&&!X.length){L.append(el("div","note","Empty."));return;}
+  T.forEach(([k,v])=>L.append(el("p","led","Term: "+k+" = "+v)));
+  C.forEach(c=>L.append(el("p","led","Claim ["+c.status+"]: "+c.claim)));
+  X.forEach(x=>L.append(el("p","led","Counter: "+x.counterexample)));
+}
+function add(role,text){
+  const m=el("div","m "+(role==="u"?"u":"s"));
+  m.append(el("span","who",role==="u"?"You":"Socrates"));
+  const b=el("span","",text); m.append(b);
+  $("chat").append(m); $("chat").scrollTop=1e9; return b;
+}
+async function send(text){
+  if(!text.trim())return;
+  add("u",text); turns.push({role:"user",content:text});
+  $("q").value=""; $("go").disabled=true; $("status").textContent="Socrates is thinking…";
+  const out=add("s","…");
+  const prompt=SYS+"\n\nConversation so far:\n"+turns.map(t=>(t.role==="user"?"Person: ":"Socrates: ")+t.content).join("\n")+"\n\nReply now as Socrates (call tools first).";
+  try{
+    const r=await sample(prompt,{tools,cache:false,onText:({text})=>{out.textContent=text;$("chat").scrollTop=1e9;}});
+    out.textContent=r.text; turns.push({role:"assistant",content:r.text}); $("status").textContent="";
+  }catch(e){
+    out.textContent="Forgive me, the conversation faltered ("+(e&&e.code||"error")+").";
+    $("status").textContent=e&&e.code==="not_granted"?"Permission to ask Claude was declined.":"";
+  }
+  $("go").disabled=false; $("q").focus();
+}
+$("f").addEventListener("submit",e=>{e.preventDefault();send($("q").value);});
+["Is it ever right to break a promise?","What is a good life?","Is my job worth staying in?","Can virtue be taught?"].forEach(s=>{
+  const b=el("button","chip",s);b.type="button";b.onclick=()=>send(s);$("chips").append(b);});
+add("s","Greetings, friend. I know nothing, but I love a good question. What troubles or puzzles you?");
+(async()=>{
+  try{ if(window.claude) sample=await claude.use("sample"); }catch(e){}
+  if(!sample){ $("go").disabled=true; $("status").textContent="Open this page in Claude to talk with Socrates."; }
+})();
+</script>
+</body>
+</html>

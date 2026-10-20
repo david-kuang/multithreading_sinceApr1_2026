@@ -671,5 +671,10 @@ Models. I'm using Claude Opus version 5. Environment. Opencode integrated with I
 Humanist AI should be under control in all SDLC Software Development Life Cycle. Safety constraint matters.
 Thu Sep 17th, 2026 
 1Setup opencode AI coding Agent=https://computingforgeeks.com/setup-opencode-ai-coding-agent/
-
-
+Mon Oct 19th 2026
+Prompt={
+mainframe environment creation. We already have lower environments, like Test, Cert environment. Of course, we have Production environment for sure. 
+Create a plan with detailed information, steps, check points, milestones to by reusing Cert environment to build a performance/load testing 
+environment, say load environment. 
+For instance, HLQ1=T in Test environment, HLQ1=C in Cert environment, so in will-be created load environment, HLQ1 will be L.
+}

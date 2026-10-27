@@ -678,3 +678,6 @@ Create a plan with detailed information, steps, check points, milestones to by r
 environment, say load environment. 
 For instance, HLQ1=T in Test environment, HLQ1=C in Cert environment, so in will-be created load environment, HLQ1 will be L.
 }
+Mon Oct 26th 2026 SHARE.org 2026
+Another link(instead)=https://www.cmg.org/2026/08/toronto-regional-mainframe-and-ai/?utm_source=chatgpt.com
+

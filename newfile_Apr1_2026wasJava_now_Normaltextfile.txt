@@ -683,4 +683,17 @@ Another link(instead)=https://www.cmg.org/2026/08/toronto-regional-mainframe-and
 MonNov2 Tue Nov 3rd 2026
 1Use a better email to sign up cohere.com so able to use(hickup on pip install cohere) co=cohere.Client("COHERE_API_KEY") link=https://cohere.com/blog/hello-world-p1
 2https://github.com/cohere-ai/cohere-developer-experience/blob/main/notebooks/guides/Hello_World_Meet_Language_AI.ipynb?ref=txt.cohere.com 
+(ThinkPad-Lenovo-X1-Carbon)C:\workplaceyhk\pythonrelated\pyartifacts\aistudio_google1.py
+from google import genai
+
+client = genai.Client(api_key="API-KEY-YHK")
+
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents="Hello world!",
+)
+
+print(response.text)
+
+print("GOOD")
 

@@ -680,4 +680,7 @@ For instance, HLQ1=T in Test environment, HLQ1=C in Cert environment, so in will
 }
 Mon Oct 26th 2026 SHARE.org 2026
 Another link(instead)=https://www.cmg.org/2026/08/toronto-regional-mainframe-and-ai/?utm_source=chatgpt.com
+MonNov2 Tue Nov 3rd 2026
+1Use a better email to sign up cohere.com so able to use(hickup on pip install cohere) co=cohere.Client("COHERE_API_KEY") link=https://cohere.com/blog/hello-world-p1
+2https://github.com/cohere-ai/cohere-developer-experience/blob/main/notebooks/guides/Hello_World_Meet_Language_AI.ipynb?ref=txt.cohere.com 
 

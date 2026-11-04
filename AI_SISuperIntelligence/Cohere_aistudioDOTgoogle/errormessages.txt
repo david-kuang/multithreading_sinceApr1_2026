@@ -1,101 +1,35 @@
-python aistudio_google1.py 
-Using cached distro-1.9.0-py3-none-any.whl (20 kB)
-Downloading google_auth-2.62.1-py3-none-any.whl (267 kB)
-Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
-Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
-Downloading pydantic-2.14.2-py3-none-any.whl (490 kB)
-Downloading pydantic_core-2.50.2-cp312-cp312-win_amd64.whl (2.3 MB)
-   ---------------------------------------- 2.3/2.3 MB 18.3 MB/s  0:00:00
-Downloading requests-2.34.2-py3-none-any.whl (73 kB)
-Downloading charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl (207 kB)
-Downloading idna-3.20-py3-none-any.whl (69 kB)
-Downloading tenacity-9.1.4-py3-none-any.whl (28 kB)
-Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
-Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
-Downloading websockets-17.4-cp312-cp312-win_amd64.whl (219 kB)
-Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
-Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
-Downloading cryptography-50.0.2-cp311-abi3-win_amd64.whl (3.8 MB)
-   ---------------------------------------- 3.8/3.8 MB 28.5 MB/s  0:00:00
-Downloading cffi-2.1.1-cp312-cp312-win_amd64.whl (185 kB)
-Using cached h11-0.16.0-py3-none-any.whl (37 kB)
-Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
-Downloading pyasn1-0.6.5-py3-none-any.whl (84 kB)
-Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
-Downloading pycparser-3.12-py3-none-any.whl (62 kB)
-Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
-Installing collected packages: websockets, urllib3, typing-extensions, tenacity,
- sniffio, pycparser, pyasn1, idna, h11, distro, charset_normalizer, certifi, ann
-otated-types, typing-inspection, requests, pydantic-core, pyasn1-modules, httpco
-re, cffi, anyio, pydantic, httpx, cryptography, google-auth, google-genai
-Successfully installed annotated-types-0.8.0 anyio-4.16.0 certifi-2026.10.23 cff
-i-2.1.1 charset_normalizer-3.5.2 cryptography-50.0.2 distro-1.9.0 google-auth-2.
-62.1 google-genai-2.34.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 pyasn1
--0.6.5 pyasn1-modules-0.4.2 pycparser-3.12 pydantic-2.14.2 pydantic-core-2.50.2
-requests-2.34.2 sniffio-1.3.1 tenacity-9.1.4 typing-extensions-4.16.0 typing-ins
-pection-0.4.4 urllib3-2.8.0 websockets-17.4
-
-(.venv) C:\Users\David\.venv\Scripts>cd c:\workplaceyhk
-
-(.venv) c:\workplaceyhk>dir
- Volume in drive C is Windows8_OS
- Volume Serial Number is D87D-0AAB
-
- Directory of c:\workplaceyhk
-
-07/06/2026  11:45 AM    <DIR>          .
-07/06/2026  11:45 AM    <DIR>          ..
-11/03/2026  06:00 PM    <DIR>          pythonrelated
-05/27/2026  09:22 PM    <DIR>          redis_remotedictionarysystem
-04/04/2026  04:22 PM    <DIR>          rust
-               0 File(s)              0 bytes
-               5 Dir(s)  130,454,548,480 bytes free
-
-(.venv) c:\workplaceyhk>cd pythonrelated\pyartifacts
-
-(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python aistudio_google1.py
-Traceback (most recent call last):
-  File "c:\workplaceyhk\pythonrelated\pyartifacts\aistudio_google1.py", line 4,
-in <module>
-    client = genai.Client()
-             ^^^^^^^^^^^^^^
-  File "C:\Users\David\.venv\Lib\site-packages\google\genai\client.py", line 422
-, in __init__
-    self._api_client = self._get_api_client(
-                       ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David\.venv\Lib\site-packages\google\genai\client.py", line 477
-, in _get_api_client
-    return BaseApiClient(
-           ^^^^^^^^^^^^^^
+in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\AppData\Local\Programs\Python\Python312\Lib\concurrent\fu
+tures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\AppData\Local\Programs\Python\Python312\Lib\concurrent\fu
+tures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\David\.venv\Lib\site-packages\tenacity\__init__.py", line 473,
+in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
   File "C:\Users\David\.venv\Lib\site-packages\google\genai\_api_client.py", lin
-e 1049, in __init__
-    raise ValueError(
-ValueError: No API key was provided. Please pass a valid API key. Learn how to c
-reate an API key at https://ai.google.dev/gemini-api/docs/api-key.
+e 1826, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\errors.py", line 187
+, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\errors.py", line 216
+, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message
+': 'This model models/gemini-2.5-flash is no longer available to new users. Plea
+se update your code to use models/gemini-3.8-flash for the latest features and i
+mprovements. We recommend you to use the Interactions API (https://ai.google.dev
+/gemini-api/docs/get-started).', 'status': 'NOT_FOUND'}}
 
 (.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python aistudio_google1.py
 Traceback (most recent call last):
-  File "c:\workplaceyhk\pythonrelated\pyartifacts\aistudio_google1.py", line 4,
-in <module>
-    client = genai.Client()
-             ^^^^^^^^^^^^^^
-  File "C:\Users\David\.venv\Lib\site-packages\google\genai\client.py", line 422
-, in __init__
-    self._api_client = self._get_api_client(
-                       ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\David\.venv\Lib\site-packages\google\genai\client.py", line 477
-, in _get_api_client
-    return BaseApiClient(
-           ^^^^^^^^^^^^^^
-  File "C:\Users\David\.venv\Lib\site-packages\google\genai\_api_client.py", lin
-e 1049, in __init__
-    raise ValueError(
-ValueError: No API key was provided. Please pass a valid API key. Learn how to c
-reate an API key at https://ai.google.dev/gemini-api/docs/api-key.
-
-(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python aistudio_google1.py
-Traceback (most recent call last):
-  File "c:\workplaceyhk\pythonrelated\pyartifacts\aistudio_google1.py", line 6,
+  File "c:\workplaceyhk\pythonrelated\pyartifacts\aistudio_google1.py", line 5,
 in <module>
     response = client.models.generate_content(
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -222,14 +156,79 @@ e 1826, in _request_once
   File "C:\Users\David\.venv\Lib\site-packages\google\genai\errors.py", line 187
 , in raise_for_response
     cls.raise_error(response.status_code, response_json, response)
-  File "C:\Users\David\.venv\Lib\site-packages\google\genai\errors.py", line 216
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\errors.py", line 218
 , in raise_error
-    raise ClientError(status_code, response_json, response)
-google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message
-': 'This model models/gemini-2.5-flash is no longer available to new users. Plea
-se update your code to use models/gemini-3.8-flash for the latest features and i
-mprovements. We recommend you to use the Interactions API (https://ai.google.dev
-/gemini-api/docs/get-started).', 'status': 'NOT_FOUND'}}
+    raise ServerError(status_code, response_json, response)
+google.genai.errors.ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messa
+ge': 'This model is currently experiencing high demand. Spikes in demand are usu
+ally temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python aistudio_google1.py
+Traceback (most recent call last):
+  File "c:\workplaceyhk\pythonrelated\pyartifacts\aistudio_google1.py", line 5,
+in <module>
+    response = client.models.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\models.py", line 637
+0, in generate_content
+    response = self._generate_content_with_continuation(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\models.py", line 621
+1, in _generate_content_with_continuation
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\models.py", line 475
+0, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\_api_client.py", lin
+e 2073, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\_api_client.py", lin
+e 1849, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore
+[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\tenacity\__init__.py", line 470,
+in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\tenacity\__init__.py", line 371,
+in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\tenacity\__init__.py", line 413,
+in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\tenacity\__init__.py", line 184,
+in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\AppData\Local\Programs\Python\Python312\Lib\concurrent\fu
+tures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\AppData\Local\Programs\Python\Python312\Lib\concurrent\fu
+tures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\David\.venv\Lib\site-packages\tenacity\__init__.py", line 473,
+in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\_api_client.py", lin
+e 1826, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\errors.py", line 187
+, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "C:\Users\David\.venv\Lib\site-packages\google\genai\errors.py", line 218
+, in raise_error
+    raise ServerError(status_code, response_json, response)
+google.genai.errors.ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messa
+ge': 'This model is currently experiencing high demand. Spikes in demand are usu
+ally temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
 
 (.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python aistudio_google1.py
 Traceback (most recent call last):

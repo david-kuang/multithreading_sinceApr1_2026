@@ -1,0 +1,25 @@
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python gemini_aistudio_google2
+.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-03 21:26:55] Attempt #1: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:27:57] Attempt #2: Connecting to Google...
+
+============================================================
+SUCCESS - VALID RESPONSE RECEIVED!
+============================================================
+Hello! How can I help you today?
+
+GOOD
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>

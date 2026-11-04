@@ -1,0 +1,300 @@
+
+[2026-11-03 21:47:59] Attempt #12: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:49:02] Attempt #13: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:50:03] Attempt #14: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:51:04] Attempt #15: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 5h9m33.391404671s.', '
+status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google
+.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url
+': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googl
+eapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate con
+tent requests per day limit exceeded on Free Tier. See https://ai.google.dev/gem
+ini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/ge
+nerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProject
+PerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.8-flash', 'location':
+ 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Ret
+ryInfo', 'retryDelay': '18573s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:52:04] Attempt #16: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:53:05] Attempt #17: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 5h7m32.346371386s.', '
+status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google
+.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url
+': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googl
+eapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate con
+tent requests per day limit exceeded on Free Tier. See https://ai.google.dev/gem
+ini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/ge
+nerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProject
+PerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3
+.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Ret
+ryInfo', 'retryDelay': '18452s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:54:05] Attempt #18: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:55:11] Attempt #19: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+Traceback (most recent call last):
+  File "c:\workplaceyhk\pythonrelated\pyartifacts\gemini_aistudio_google3GEMINI_
+API_KEY.py", line 82, in <module>
+    main()
+  File "c:\workplaceyhk\pythonrelated\pyartifacts\gemini_aistudio_google3GEMINI_
+API_KEY.py", line 78, in main
+    time.sleep(RETRY_INTERVAL)
+KeyboardInterrupt
+^C
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>type gemini_aistudio_google3GE
+MINI_API_KEY.py
+import os
+import sys
+import time
+from datetime import datetime
+
+from google import genai
+
+# Configuration
+API_KEY = os.getenv("GEMINI_API_KEY")
+#API_KEY = ""
+MODEL = "gemini-3.8-flash"
+#PROMPT = "Hello world!"
+PROMPT = "Hello! Explain AI to me."
+#PROMPT = "Explain how AI works in a few words"
+#PROMPT = "Write a Python script that generates the first 20 Fibonacci numbers a
+nd saves them to fibonacci.txt. Then read the file and print its contents."
+RETRY_INTERVAL = 60  # seconds
+
+
+def main():
+
+    if not API_KEY:
+        print("ERROR: GEMINI_API_KEY environment variable not found.")
+        sys.exit(1)
+
+    client = genai.Client(api_key=API_KEY)
+
+    attempt = 0
+
+    print("=" * 60)
+    print("Google Gemini API - Continuous Connection Test")
+    print(f"Model: {MODEL}")
+    print(f"Retry interval: {RETRY_INTERVAL} seconds")
+    print("=" * 60)
+
+    while True:
+
+        attempt += 1
+
+        print(
+            f"\n[{datetime.now():%Y-%m-%d %H:%M:%S}] "
+            f"Attempt #{attempt}: Connecting to Google..."
+        )
+
+        try:
+
+            response = client.models.generate_content(
+                model=MODEL,
+                contents=PROMPT,
+            )
+
+            # Validate response
+            result = response.text
+
+            if result and result.strip():
+
+                print("\n" + "=" * 60)
+                print("SUCCESS - VALID RESPONSE RECEIVED!")
+                print("=" * 60)
+
+                print(result)
+
+                print("\nGOOD")
+
+                sys.exit(0)
+
+            else:
+
+                print("Google returned an empty response.")
+
+        except KeyboardInterrupt:
+
+            print("\nStopped by user.")
+            sys.exit(1)
+
+        except Exception as exc:
+
+            print(f"Connection failed: {type(exc).__name__}: {exc}")
+
+        # Retry after one minute
+        print(f"\nNext attempt in {RETRY_INTERVAL} seconds...")
+        time.sleep(RETRY_INTERVAL)
+
+
+if __name__ == "__main__":
+    main()
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>dur gemini_aistudio_google3GEM
+INI_API_KEY.py
+'dur' is not recognized as an internal or external command,
+operable program or batch file.
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>dir gemini_aistudio_google3GEM
+INI_API_KEY.py
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of c:\workplaceyhk\pythonrelated\pyartifacts
+
+11/04/2026  04:49 PM             2,056 gemini_aistudio_google3GEMINI_API_KEY.py
+               1 File(s)          2,056 bytes
+               0 Dir(s)  129,966,993,408 bytes free
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python gemini_aistudio_google3
+GEMINI_API_KEY.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-04 16:50:28] Attempt #1: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 16:51:32] Attempt #2: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 16:52:36] Attempt #3: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 16:54:26] Attempt #4: Connecting to Google...
+
+============================================================
+SUCCESS - VALID RESPONSE RECEIVED!
+============================================================
+Here is the Python script to generate the first 20 Fibonacci numbers, save them
+to a file, and then read and display them:
+
+```python
+def generate_fibonacci(n):
+    """Generate a list containing the first n Fibonacci numbers."""
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+
+    fib_sequence = [0, 1]
+    while len(fib_sequence) < n:
+        fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
+    return fib_sequence
+
+
+filename = "fibonacci.txt"
+
+# 1. Generate the first 20 Fibonacci numbers
+fib_numbers = generate_fibonacci(20)
+
+# 2. Save the numbers to fibonacci.txt (one per line)
+with open(filename, "w") as file:
+    for num in fib_numbers:
+        file.write(f"{num}\n")
+
+print(f"Successfully saved {len(fib_numbers)} numbers to '{filename}'.\n")
+
+# 3. Read the file and print its contents
+print(f"Contents of '{filename}':")
+with open(filename, "r") as file:
+    contents = file.read()
+    print(contents)
+```
+
+### Output:
+```text
+Successfully saved 20 numbers to 'fibonacci.txt'.
+
+Contents of 'fibonacci.txt':
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+1597
+2584
+4181
+```
+
+GOOD
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>

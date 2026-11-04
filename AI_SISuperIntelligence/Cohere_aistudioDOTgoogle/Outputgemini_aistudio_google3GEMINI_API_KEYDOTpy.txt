@@ -1,0 +1,270 @@
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\David>cd .venv\Scripts
+
+C:\Users\David\.venv\Scripts>dir a*.bat
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\Users\David\.venv\Scripts
+
+11/03/2026  05:59 PM               991 activate.bat
+               1 File(s)            991 bytes
+               0 Dir(s)  130,406,572,032 bytes free
+
+C:\Users\David\.venv\Scripts>activate.bat
+
+(.venv) C:\Users\David\.venv\Scripts>cd ..\..\
+
+(.venv) C:\Users\David>dir
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\Users\David
+
+11/03/2026  05:59 PM    <DIR>          .
+11/03/2026  05:59 PM    <DIR>          ..
+06/18/2026  07:16 PM             2,190 .bash_history
+11/03/2026  07:09 AM    <DIR>          .cargo
+04/28/2026  03:28 PM    <DIR>          .conda
+07/23/2026  08:33 PM    <DIR>          .dotnet
+03/15/2026  09:49 PM               149 .gitconfig
+02/24/2026  10:41 AM    <DIR>          .jmc
+09/06/2026  02:16 PM    <DIR>          .LSC
+04/30/2026  05:53 PM    <DIR>          .m2
+03/22/2026  07:06 AM    <DIR>          .ms-ad
+01/07/2026  01:10 PM    <DIR>          .openjfx
+09/06/2026  02:16 PM    <DIR>          .QtWebEngineProcess
+04/28/2026  03:20 PM    <DIR>          .readyapi
+05/27/2026  09:24 PM                29 .rediscli_history
+04/04/2026  04:00 PM    <DIR>          .rustup
+01/07/2026  01:10 PM    <DIR>          .soapui
+07/23/2026  08:22 PM    <DIR>          .templateengine
+11/03/2026  05:59 PM    <DIR>          .venv
+01/02/2026  11:21 AM    <DIR>          .vscode
+07/06/2026  12:02 PM               148 chatmemory.lock.db
+07/06/2026  12:06 PM            20,480 chatmemory.mv.db
+07/06/2026  12:02 PM            19,574 chatmemory.trace.db
+01/08/2026  08:07 AM    <DIR>          Contacts
+11/03/2026  06:53 AM    <DIR>          Desktop
+01/08/2026  08:07 AM    <DIR>          Documents
+11/03/2026  05:41 PM    <DIR>          Downloads
+05/14/2026  07:04 AM    <DIR>          Favorites
+04/01/2026  05:11 PM    <DIR>          github_com
+01/01/2026  07:43 PM    <DIR>          IdeaProjects
+01/08/2026  08:07 AM    <DIR>          Links
+04/28/2026  03:28 PM    <DIR>          miniconda3
+01/08/2026  08:07 AM    <DIR>          Music
+11/03/2026  05:47 PM    <DIR>          OneDrive
+01/08/2026  08:07 AM    <DIR>          Pictures
+07/06/2026  08:47 AM    <DIR>          Postman
+07/22/2014  05:22 AM    <DIR>          Roaming
+04/04/2026  04:10 PM               157 rust.bat
+01/08/2026  08:07 AM    <DIR>          Saved Games
+01/08/2026  08:07 AM    <DIR>          Searches
+01/08/2026  08:07 AM    <DIR>          Videos
+               7 File(s)         42,727 bytes
+              34 Dir(s)  130,406,629,376 bytes free
+
+(.venv) C:\Users\David>cd c:\workplaceyhk\pythonrelated\pyartifacts
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>dir
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of c:\workplaceyhk\pythonrelated\pyartifacts
+
+11/03/2026  09:34 PM    <DIR>          .
+11/03/2026  09:34 PM    <DIR>          ..
+11/03/2026  06:12 PM               267 aistudio_google1.py
+11/03/2026  05:16 PM                55 cohere1.py
+11/03/2026  09:33 PM             1,865 gemini_aistudio_google2.py
+11/03/2026  09:34 PM             1,812 gemini_aistudio_google3GEMINI_API_KEY.py
+07/06/2026  12:41 PM               352 openai_helloworld1_apikeyNeeded.py
+07/06/2026  11:55 AM                39 pyHW1.py
+07/06/2026  11:51 AM                93 requirementsJul6_2026.txt
+07/06/2026  12:22 PM             1,342 verify_apikeyopenaiDK1.py
+               8 File(s)          5,825 bytes
+               2 Dir(s)  130,406,621,184 bytes free
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python gemini_aistudio_google3
+GEMINI_API_KEY.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-03 21:36:38] Attempt #1: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:37:39] Attempt #2: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:38:41] Attempt #3: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:39:48] Attempt #4: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:40:50] Attempt #5: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:41:50] Attempt #6: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:42:51] Attempt #7: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:43:52] Attempt #8: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:44:53] Attempt #9: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:45:54] Attempt #10: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:46:59] Attempt #11: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:47:59] Attempt #12: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:49:02] Attempt #13: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:50:03] Attempt #14: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:51:04] Attempt #15: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 5h9m33.391404671s.', '
+status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google
+.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url
+': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googl
+eapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate con
+tent requests per day limit exceeded on Free Tier. See https://ai.google.dev/gem
+ini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/ge
+nerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProject
+PerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.8-flash', 'location':
+ 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Ret
+ryInfo', 'retryDelay': '18573s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:52:04] Attempt #16: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:53:05] Attempt #17: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 5h7m32.346371386s.', '
+status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google
+.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url
+': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googl
+eapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate con
+tent requests per day limit exceeded on Free Tier. See https://ai.google.dev/gem
+ini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/ge
+nerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProject
+PerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3
+.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Ret
+ryInfo', 'retryDelay': '18452s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:54:05] Attempt #18: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-03 21:55:11] Attempt #19: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+Traceback (most recent call last):
+  File "c:\workplaceyhk\pythonrelated\pyartifacts\gemini_aistudio_google3GEMINI_
+API_KEY.py", line 82, in <module>
+    main()
+  File "c:\workplaceyhk\pythonrelated\pyartifacts\gemini_aistudio_google3GEMINI_
+API_KEY.py", line 78, in main
+    time.sleep(RETRY_INTERVAL)
+KeyboardInterrupt
+^C
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>

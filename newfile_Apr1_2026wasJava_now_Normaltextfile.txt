@@ -752,5 +752,11 @@ and expert AI assistant").
 
 Provide the file structure, the required dependencies for 'requirements.txt', and the full, copy-pasteable 'app.py' script.
 }
+try1(chatGPT)={
+"Write a complete, production-ready chatGPT-like web app in Python across a single output. 
+Include every single file, full import statements, complete error handling, database schemas, 
+a full suite of unit tests, and an inline documentation guide explaining every function. 
+Do not use 'to be implemented later' comments."
+}
 
 

@@ -10,9 +10,9 @@ API_KEY = os.getenv("GEMINI_API_KEY")
 #API_KEY = ""
 MODEL = "gemini-3.8-flash"
 #PROMPT = "Hello world!"
-PROMPT = "Hello! Explain AI to me."
+#PROMPT = "Hello! Explain AI to me."
 #PROMPT = "Explain how AI works in a few words"
-#PROMPT = "Write a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt. Then read the file and print its contents."
+PROMPT = "Write a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt. Then read the file and print its contents."
 RETRY_INTERVAL = 60  # seconds
 
 

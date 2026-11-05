@@ -1,0 +1,526 @@
+    lifespan=lifespan,
+    docs_url="/api/docs",
+    redoc_url="/api/redoc"
+)
+
+# CORS Policy
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include API Routers
+app.include_router(auth.router)
+app.include_router(chat.router)
+
+# Mount Static Assets
+static_dir = os.path.join(os.path.dirname(__file__), "static")
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
+
+@app.get("/", include_in_schema=False)
+async def serve_index():
+    """Serves the Single Page Application UI entry point."""
+    return FileResponse(os.path.join(static_dir, "index.html"))
+```
+
+---
+
+### `tests/conftest.py`
+
+```python
+"""
+Pytest configuration, fixtures, and async test client setups.
+Configures an isolated in-memory SQLite engine for the test suite.
+"""
+
+import asyncio
+from typing import AsyncGenerator
+import pytest
+from httpx import AsyncClient, ASGITransport
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
+cSession
+
+from app.main import app
+from app.database import Base, get_db
+
+TEST_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
+
+test_engine = create_async_engine(
+    TEST_DATABASE_URL,
+    echo=False,
+    future=True,
+    connect_args={"check_same_thread": False}
+)
+
+TestAsyncSessionLocal = async_sessionmaker(
+    bind=test_engine,
+    class_=AsyncSession,
+    autocommit=False,
+    autoflush=False,
+    expire_on_commit=False
+)
+
+
+@pytest.fixture(scope="session")
+def event_loop():
+    """Create an instance of the default event loop for each test case."""
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
+
+
+@pytest.fixture(scope="function")
+async def db_session() -> AsyncGenerator[AsyncSession, None]:
+    """Provides a pristine database schema session per test function."""
+    async with test_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    async with TestAsyncSessionLocal() as session:
+        yield session
+
+    async with test_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+
+
+@pytest.fixture(scope="function")
+async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient, None]:
+
+    """Provides a mocked HTTP test client bound to the transactional DB session.
+"""
+    async def override_get_db():
+        yield db_session
+
+    app.dependency_overrides[get_db] = override_get_db
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        yield ac
+    app.dependency_overrides.clear()
+```
+
+---
+
+### `tests/test_auth.py`
+
+```python
+"""
+Unit and integration tests for authentication, user registration, and security.
+"""
+
+import pytest
+from httpx import AsyncClient
+
+
+@pytest.mark.asyncio
+async def test_register_and_login_flow(client: AsyncClient):
+    """Verifies that an unregistered user can register, receive a token, and rea
+d their profile."""
+    # 1. Register User
+    reg_res = await client.post(
+        "/api/auth/register",
+        json={"username": "alice", "email": "alice@example.com", "password": "su
+persecurepassword123"}
+    )
+    assert reg_res.status_code == 201
+    reg_data = reg_res.json()
+    assert reg_data["username"] == "alice"
+    assert "id" in reg_data
+
+    # 2. Prevent Duplicate Registration
+    dup_res = await client.post(
+        "/api/auth/register",
+        json={"username": "alice", "email": "alice2@example.com", "password": "s
+upersecurepassword123"}
+    )
+    assert dup_res.status_code == 400
+
+    # 3. Successful Login
+    login_res = await client.post(
+        "/api/auth/login",
+        data={"username": "alice", "password": "supersecurepassword123"}
+    )
+    assert login_res.status_code == 200
+    token_data = login_res.json()
+    assert "access_token" in token_data
+    token = token_data["access_token"]
+
+    # 4. Verify Identity via /me
+    me_res = await client.get("/api/auth/me", headers={"Authorization": f"Bearer
+ {token}"})
+    assert me_res.status_code == 200
+    assert me_res.json()["email"] == "alice@example.com"
+
+
+@pytest.mark.asyncio
+async def test_invalid_credentials(client: AsyncClient):
+    """Ensures that incorrect credentials reject authentication with 401."""
+    res = await client.post(
+        "/api/auth/login",
+        data={"username": "nonexistent", "password": "wrongpassword"}
+    )
+    assert res.status_code == 401
+```
+
+---
+
+### `tests/test_chat.py`
+
+```python
+"""
+Unit and integration tests for conversation life-cycle management and SSE respon
+se streaming.
+"""
+
+import pytest
+from httpx import AsyncClient
+
+
+async def get_auth_token(client: AsyncClient, username: str = "chattester") -> s
+tr:
+    """Helper fixture function to create and authenticate a user."""
+    await client.post(
+        "/api/auth/register",
+        json={"username": username, "email": f"{username}@test.com", "password":
+ "password12345"}
+    )
+    res = await client.post(
+        "/api/auth/login",
+        data={"username": username, "password": "password12345"}
+    )
+    return res.json()["access_token"]
+
+
+@pytest.mark.asyncio
+async def test_conversation_crud(client: AsyncClient):
+    """Tests the full lifecycle of a conversation (Create, Read, Update, Delete)
+."""
+    token = await get_auth_token(client, "crud_user")
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # 1. Create Conversation
+    create_res = await client.post(
+        "/api/chat/conversations",
+        headers=headers,
+        json={"title": "Test Title"}
+    )
+    assert create_res.status_code == 201
+    conv_id = create_res.json()["id"]
+
+    # 2. Get Single Conversation
+    get_res = await client.get(f"/api/chat/conversations/{conv_id}", headers=hea
+ders)
+    assert get_res.status_code == 200
+    assert get_res.json()["title"] == "Test Title"
+
+    # 3. Patch / Update Title
+    patch_res = await client.patch(
+        f"/api/chat/conversations/{conv_id}",
+        headers=headers,
+        json={"title": "Updated Title"}
+    )
+    assert patch_res.status_code == 200
+    assert patch_res.json()["title"] == "Updated Title"
+
+    # 4. Delete Conversation
+    del_res = await client.delete(f"/api/chat/conversations/{conv_id}", headers=
+headers)
+    assert del_res.status_code == 204
+
+    # 5. Verify Not Found
+    re_get = await client.get(f"/api/chat/conversations/{conv_id}", headers=head
+ers)
+    assert re_get.status_code == 404
+
+
+@pytest.mark.asyncio
+async def test_message_stream_flow(client: AsyncClient):
+    """Tests submitting a user message and streaming back LLM tokens."""
+    token = await get_auth_token(client, "stream_user")
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # Create target conversation
+    conv_res = await client.post("/api/chat/conversations", headers=headers, jso
+n={"title": "Stream Chat"})
+    conv_id = conv_res.json()["id"]
+
+    # Post message and observe SSE stream
+    stream_res = await client.post(
+        f"/api/chat/conversations/{conv_id}/messages",
+        headers=headers,
+        json={"content": "Hello, AI!"}
+    )
+    assert stream_res.status_code == 200
+    assert "text/event-stream" in stream_res.headers["content-type"]
+
+    body = stream_res.text
+    assert "data: " in body
+    assert "[DONE]" in body
+
+    # Verify message persistence in conversation history
+    history_res = await client.get(f"/api/chat/conversations/{conv_id}", headers
+=headers)
+    history = history_res.json()
+    assert len(history["messages"]) == 2  # 1 User Message + 1 Assistant Message
+
+    assert history["messages"][0]["role"] == "user"
+    assert history["messages"][0]["content"] == "Hello, AI!"
+    assert history["messages"][1]["role"] == "assistant"
+    assert len(history["messages"][1]["content"]) > 0
+```
+
+---
+
+### Step-by-Step Inline Execution Guide
+
+#### 1. Setup Environment
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+#### 2. Run the Full Test Suite
+Ensure that all unit tests, authentication guards, database cascades, and stream
+ing endpoints pass:
+```bash
+pytest -v
+```
+
+#### 3. Run the Web Application
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+Navigate to `http://localhost:8000` in any modern web browser to access the appl
+ication UI. Interactive OpenAPI documentation is accessible at `http://localhost
+:8000/api/docs`.
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\David>cd .venv\Scripts\
+
+C:\Users\David\.venv\Scripts>dir
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\Users\David\.venv\Scripts
+
+11/03/2026  06:00 PM    <DIR>          .
+11/03/2026  06:00 PM    <DIR>          ..
+11/03/2026  05:59 PM             2,034 activate
+11/03/2026  05:59 PM               991 activate.bat
+11/03/2026  05:59 PM            26,199 Activate.ps1
+11/03/2026  06:00 PM           108,338 cffi-gen-src.exe
+11/03/2026  05:59 PM               393 deactivate.bat
+11/03/2026  06:00 PM           108,335 distro.exe
+11/03/2026  06:00 PM           108,327 httpx.exe
+11/03/2026  06:00 PM           108,330 idna.exe
+11/03/2026  06:00 PM           108,356 normalizer.exe
+11/03/2026  06:00 PM           108,396 pip.exe
+11/03/2026  06:00 PM           108,396 pip3.12.exe
+11/03/2026  06:00 PM           108,396 pip3.exe
+11/03/2026  05:59 PM           274,712 python.exe
+11/03/2026  05:59 PM           263,448 pythonw.exe
+11/03/2026  06:00 PM           108,336 websockets.exe
+              15 File(s)      1,542,987 bytes
+               2 Dir(s)  129,669,980,160 bytes free
+
+C:\Users\David\.venv\Scripts>activate.bat
+
+(.venv) C:\Users\David\.venv\Scripts>cd C:\
+
+(.venv) C:\>dir
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\
+
+07/22/2014  05:16 AM    <DIR>          Intel
+07/21/2014  01:49 PM    <DIR>          mfg
+08/22/2013  10:22 AM    <DIR>          PerfLogs
+10/02/2026  05:55 AM    <DIR>          Program Files
+05/14/2026  06:44 AM    <DIR>          Program Files (x86)
+01/01/2026  09:46 PM                 0 Recovery.txt
+01/01/2026  06:55 PM    <DIR>          Users
+10/13/2026  07:00 PM    <DIR>          Windows
+07/06/2026  11:45 AM    <DIR>          workplaceyhk
+               1 File(s)              0 bytes
+               8 Dir(s)  129,669,976,064 bytes free
+
+(.venv) C:\>cd workplaceyhk\pythonrelated\pyartifacts
+
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>dir *.py
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\workplaceyhk\pythonrelated\pyartifacts
+
+11/03/2026  06:12 PM               267 aistudio_google1.py
+11/03/2026  05:16 PM                55 cohere1.py
+11/04/2026  10:41 PM             1,808 GEMINIaistudiogoogle7-No3PversusNPProblem
+Of7MillenniumPrizeProblems.py
+11/05/2026  08:41 AM             3,619 GEMINIaistudiogoogle8_try1Buildchatgptlik
+e_pythonwebapp.py
+11/04/2026  10:02 PM             2,038 GEMINIshuanzhizhuo_aistudio_google5Navier
+_StokesProblem.py
+11/03/2026  09:33 PM             1,865 gemini_aistudio_google2.py
+11/04/2026  04:49 PM             2,056 gemini_aistudio_google3GEMINI_API_KEY.py
+11/04/2026  10:16 PM             1,953 GEMINI_aistudio_google6-No2Of7MillenniumP
+rizeProblems.py
+11/04/2026  05:30 PM               875 generatedByaistudio_googleFour-1.py
+11/05/2026  04:24 PM             2,201 googleGEMINIai9_try2Buildchatgptlike_pyth
+onwebapp.py
+11/04/2026  08:59 PM                77 HW2_Nov4th-2026.py
+11/04/2026  09:19 PM               172 HW3_defSPACEtestingBracketsColon_if__name
+__equalequal_mainCOLON.py
+07/06/2026  12:41 PM               352 openai_helloworld1_apikeyNeeded.py
+07/06/2026  11:55 AM                39 pyHW1.py
+07/06/2026  12:22 PM             1,342 verify_apikeyopenaiDK1.py
+              15 File(s)         18,719 bytes
+               0 Dir(s)  129,670,041,600 bytes free
+
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>dir googleGEMINIai9_try2Buildc
+hatgptlike_pythonwebapp.py
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\workplaceyhk\pythonrelated\pyartifacts
+
+11/05/2026  04:24 PM             2,201 googleGEMINIai9_try2Buildchatgptlike_pyth
+onwebapp.py
+               1 File(s)          2,201 bytes
+               0 Dir(s)  129,670,041,600 bytes free
+
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>type googleGEMINIai9_try2Build
+chatgptlike_pythonwebapp.py
+import os
+import sys
+import time
+from datetime import datetime
+
+from google import genai
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+MODEL = "gemini-3.8-flash"
+#PROMPT = "Whether every problem whose solution can be quickly checked by a comp
+uter can also be quickly found by a computer."
+PROMPT = """
+Write a complete, production-ready chatGPT-like web app in Python across a singl
+e output.
+Include every single file, full import statements, complete error handling, data
+base schemas,
+a full suite of unit tests, and an inline documentation guide explaining every f
+unction.
+Do not use 'to be implemented later' comments.
+"""
+
+#Make a zip file so it is downloadable.
+
+RETRY_INTERVAL = 60  # seconds
+
+def main():
+
+    if not API_KEY:
+        print("ERROR: GEMINI_API_KEY environment variable not found.")
+        sys.exit(1)
+
+    client = genai.Client(api_key=API_KEY)
+
+    attempt = 0
+
+    print("=" * 60)
+    print("Google Gemini API - Continuous Connection Test")
+    print(f"Model: {MODEL}")
+    print(f"Retry interval: {RETRY_INTERVAL} seconds")
+    print("=" * 60)
+
+    while True:
+
+        attempt += 1
+
+        print(
+            f"\n[{datetime.now():%Y-%m-%d %H:%M:%S}] "
+            f"Attempt #{attempt}: Connecting to Google..."
+        )
+
+        try:
+
+            response = client.models.generate_content(
+                model=MODEL,
+                contents=PROMPT,
+            )
+
+            result = response.text
+
+            if result and result.strip():
+
+                print("\n" + "=" * 60)
+                print("SUCCESS - VALID RESPONSE RECEIVED!")
+                print("=" * 60)
+                print(result)
+
+                sys.exit(0)
+
+            else:
+
+                print("Google returned an empty response.")
+
+        except KeyboardInterrupt:
+
+            print("\nStopped by user.")
+            sys.exit(1)
+
+        except Exception as exc:
+
+            print(f"Connection failed: {type(exc).__name__}: {exc}")
+
+        # Retry after one minute
+        print(f"\nNext attempt in {RETRY_INTERVAL} seconds...")
+        time.sleep(RETRY_INTERVAL)
+
+if __name__ == "__main__":
+    main()
+
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>python googleGEMINIai9_try2Bui
+ldchatgptlike_pythonwebapp.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-05 16:27:16] Attempt #1: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 10h33m20.848824694s.',
+ 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/goog
+le.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'u
+rl': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goo
+gleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate c
+ontent requests per day limit exceeded on Free Tier. See https://ai.google.dev/g
+emini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/
+generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProje
+ctPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.8-flash', 'location
+': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.R
+etryInfo', 'retryDelay': '38000s'}]}}
+
+Next attempt in 60 seconds...
+Traceback (most recent call last):
+  File "C:\workplaceyhk\pythonrelated\pyartifacts\googleGEMINIai9_try2Buildchatg
+ptlike_pythonwebapp.py", line 83, in <module>
+    main()
+  File "C:\workplaceyhk\pythonrelated\pyartifacts\googleGEMINIai9_try2Buildchatg
+ptlike_pythonwebapp.py", line 80, in main
+    time.sleep(RETRY_INTERVAL)
+KeyboardInterrupt
+^C
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>

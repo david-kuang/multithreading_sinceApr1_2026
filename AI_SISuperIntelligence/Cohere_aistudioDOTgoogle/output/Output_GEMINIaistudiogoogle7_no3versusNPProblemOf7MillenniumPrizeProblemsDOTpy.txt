@@ -1,0 +1,271 @@
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>dir GEMINIaistudiogoogle7-No3P
+versusNPProblemOf7MillenniumPrizeProblems.py
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of c:\workplaceyhk\pythonrelated\pyartifacts
+
+11/04/2026  10:41 PM             1,808 GEMINIaistudiogoogle7-No3PversusNPProblem
+Of7MillenniumPrizeProblems.py
+               1 File(s)          1,808 bytes
+               0 Dir(s)  130,114,383,872 bytes free
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>type GEMINIaistudiogoogle7-No3
+PversusNPProblemOf7MillenniumPrizeProblems.py
+import os
+import sys
+import time
+from datetime import datetime
+
+from google import genai
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+MODEL = "gemini-3.8-flash"
+PROMPT = "Whether every problem whose solution can be quickly checked by a compu
+ter can also be quickly found by a computer."
+RETRY_INTERVAL = 60  # seconds
+
+def main():
+
+    if not API_KEY:
+        print("ERROR: GEMINI_API_KEY environment variable not found.")
+        sys.exit(1)
+
+    client = genai.Client(api_key=API_KEY)
+
+    attempt = 0
+
+    print("=" * 60)
+    print("Google Gemini API - Continuous Connection Test")
+    print(f"Model: {MODEL}")
+    print(f"Retry interval: {RETRY_INTERVAL} seconds")
+    print("=" * 60)
+
+    while True:
+
+        attempt += 1
+
+        print(
+            f"\n[{datetime.now():%Y-%m-%d %H:%M:%S}] "
+            f"Attempt #{attempt}: Connecting to Google..."
+        )
+
+        try:
+
+            response = client.models.generate_content(
+                model=MODEL,
+                contents=PROMPT,
+            )
+
+            result = response.text
+
+            if result and result.strip():
+
+                print("\n" + "=" * 60)
+                print("SUCCESS - VALID RESPONSE RECEIVED!")
+                print("=" * 60)
+                print(result)
+
+                sys.exit(0)
+
+            else:
+
+                print("Google returned an empty response.")
+
+        except KeyboardInterrupt:
+
+            print("\nStopped by user.")
+            sys.exit(1)
+
+        except Exception as exc:
+
+            print(f"Connection failed: {type(exc).__name__}: {exc}")
+
+        # Retry after one minute
+        print(f"\nNext attempt in {RETRY_INTERVAL} seconds...")
+        time.sleep(RETRY_INTERVAL)
+
+if __name__ == "__main__":
+    main()
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python GEMINIaistudiogoogle7-N
+o3PversusNPProblemOf7MillenniumPrizeProblems.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-04 22:42:00] Attempt #1: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:43:04] Attempt #2: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:44:45] Attempt #3: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:46:04] Attempt #4: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:47:17] Attempt #5: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:48:42] Attempt #6: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:49:49] Attempt #7: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 4h10m47.981463462s.',
+'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/googl
+e.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'ur
+l': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goog
+leapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate co
+ntent requests per day limit exceeded on Free Tier. See https://ai.google.dev/ge
+mini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/g
+enerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjec
+tPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-
+3.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Re
+tryInfo', 'retryDelay': '15047s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:50:49] Attempt #8: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:51:57] Attempt #9: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:53:45] Attempt #10: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 4h6m52.222462309s.', '
+status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google
+.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url
+': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googl
+eapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate con
+tent requests per day limit exceeded on Free Tier. See https://ai.google.dev/gem
+ini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/ge
+nerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProject
+PerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3
+.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Ret
+ryInfo', 'retryDelay': '14812s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:54:45] Attempt #11: Connecting to Google...
+
+============================================================
+SUCCESS - VALID RESPONSE RECEIVED!
+============================================================
+This question is the exact definition of the **"P versus NP" problem**, which is
+ widely considered the most famous and important unsolved problem in computer sc
+ience and mathematics.
+
+The short answer is: **We do not know yet.**
+
+Here is a breakdown of what this means, why it matters, and what most scientists
+ suspect:
+
+---
+
+### 1. The Definitions: P and NP
+* **P (Polynomial Time): Problems that can be *solved* quickly.**
+  These are tasks a computer can finish in a reasonable amount of time, even as
+the problem gets large. Examples include sorting an alphabetical list, searching
+ a database, or finding the shortest driving route between two cities.
+* **NP (Nondeterministic Polynomial Time): Problems that can be *checked* quickl
+y.**
+  If someone hands you a proposed solution, a computer can quickly verify whethe
+r it is correct.
+  * *Example:* A **Sudoku puzzle**. Solving a massive Sudoku grid from scratch c
+an take a long time, but if someone hands you a completed grid, checking that ev
+ery row, column, and square contains numbers 1-9 takes only a few seconds.
+
+The question asks: **Does $P = NP$?** (If a problem belongs to NP, does it autom
+atically belong to P?)
+
+---
+
+### 2. What Do Experts Believe?
+Most computer scientists strongly suspect that the answer is **NO ($P \neq NP$)*
+*.
+
+The general intuition is that **creating or discovering something is fundamental
+ly harder than recognizing it.**
+* Appreciating a great symphony is easy; writing one is hard.
+* Verifying that a jigsaw puzzle is completed takes a glance; putting the pieces
+ together takes hours.
+
+However, despite decades of intense research, no one has been able to mathematic
+ally *prove* that a problem exists which can be quickly checked but is impossibl
+e to quickly solve.
+
+---
+
+### 3. What Would Happen If the Answer Is "YES" ($P = NP$)?
+If it turns out that $P = NP$, the world would change dramatically overnight:
+
+1. **Modern Cryptography Would Collapse:** Almost all internet security (banking
+, private messaging, passwords) relies on math problems that are easy to check b
+ut nearly impossible to reverse-engineer (like factoring huge numbers). If $P =
+NP$, virtually all modern encryption could be cracked instantly.
+2. **Scientific Revolutions:** Tasks that currently require massive supercompute
+rs running for years-such as simulating protein folding for new medicines, optim
+izing supply chains, or training advanced artificial intelligence-could become n
+early instantaneous.
+3. **Automated Mathematics:** Computers could theoretically find proofs for any
+mathematical theorem, revolutionizing human knowledge.
+
+---
+
+### Status Today
+Because of its profound importance, the Clay Mathematics Institute named the P v
+s. NP problem one of the **seven Millennium Prize Problems** in the year 2000, o
+ffering a **\$1,000,000 prize** to anyone who can definitively prove whether $P
+= NP$ or $P \neq NP$. As of today, the prize remains unclaimed.
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>

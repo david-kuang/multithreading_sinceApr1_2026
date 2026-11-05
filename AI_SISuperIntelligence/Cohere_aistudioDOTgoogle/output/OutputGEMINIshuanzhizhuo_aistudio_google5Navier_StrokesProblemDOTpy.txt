@@ -1,0 +1,215 @@
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python HW3_defSPACEtestingBrac
+ketsColon_if__name__equalequal_mainCOLON.py
+This is HW3_defSPACEtestingBracketsColon_if__name__equalequal_mainCOLON.py file.
+
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python HW3_defSPACEtestingBrac
+ketsColon_if__name__equalequal_mainCOLON.py
+This is HW3_defSPACEtestingBracketsColon_if__name__equalequal_verifierBracketsCO
+LON.py file.
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python HW3_defSPACEtestingBrac
+ketsColon_if__name__equalequal_mainCOLON.py
+This is HW3_defSPACEtestingBracketsColon_if__name__equalequal_verifierBracketsCO
+LON.py file.
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>dir GEMINIshuanzhizhuo_aistudi
+o_google5Navier_StokesProblem.py
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of c:\workplaceyhk\pythonrelated\pyartifacts
+
+11/04/2026  10:02 PM             2,038 GEMINIshuanzhizhuo_aistudio_google5Navier
+_StokesProblem.py
+               1 File(s)          2,038 bytes
+               0 Dir(s)  130,100,805,632 bytes free
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>type GEMINIshuanzhizhuo_aistud
+io_google5Navier_StokesProblem.py
+import os
+import sys
+import time
+from datetime import datetime
+
+from google import genai
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+MODEL = "gemini-3.8-flash"
+#PROMPT = "Write a Python script that generates the first 20 Fibonacci numbers a
+nd saves them to fibonacci.txt. Then read the file and print its contents."
+PROMPT = "Whether smooth, reasonable starting conditions in a three-demensional
+incompressible fluid will always remain smooth for all time, or if they can blow
+ up."
+RETRY_INTERVAL = 60  # seconds
+
+def main():
+
+    if not API_KEY:
+        print("ERROR: GEMINI_API_KEY environment variable not found.")
+        sys.exit(1)
+
+    client = genai.Client(api_key=API_KEY)
+
+    attempt = 0
+
+    print("=" * 60)
+    print("Google Gemini API - Continuous Connection Test")
+    print(f"Model: {MODEL}")
+    print(f"Retry interval: {RETRY_INTERVAL} seconds")
+    print("=" * 60)
+
+    while True:
+
+        attempt += 1
+
+        print(
+            f"\n[{datetime.now():%Y-%m-%d %H:%M:%S}] "
+            f"Attempt #{attempt}: Connecting to Google..."
+        )
+
+        try:
+
+            response = client.models.generate_content(
+                model=MODEL,
+                contents=PROMPT,
+            )
+
+            result = response.text
+
+            if result and result.strip():
+
+                print("\n" + "=" * 60)
+                print("SUCCESS - VALID RESPONSE RECEIVED!")
+                print("=" * 60)
+                print(result)
+                print("\nGOOD")
+
+                sys.exit(0)
+
+            else:
+
+                print("Google returned an empty response.")
+
+        except KeyboardInterrupt:
+
+            print("\nStopped by user.")
+            sys.exit(1)
+
+        except Exception as exc:
+
+            print(f"Connection failed: {type(exc).__name__}: {exc}")
+
+        # Retry after one minute
+        print(f"\nNext attempt in {RETRY_INTERVAL} seconds...")
+        time.sleep(RETRY_INTERVAL)
+
+if __name__ == "__main__":
+    main()
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python GEMINIshuanzhizhuo_aist
+udio_google5Navier_StokesProblem.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-04 22:05:26] Attempt #1: Connecting to Google...
+
+============================================================
+SUCCESS - VALID RESPONSE RECEIVED!
+============================================================
+The short answer is: **mathematics does not yet know.**
+
+This exact question is the basis of the **Navier-Stokes Existence and Smoothness
+ Problem**, one of the seven famous **Millennium Prize Problems** established by
+ the Clay Mathematics Institute in 2000, carrying a \$1,000,000 reward for a sol
+ution.
+
+Here is a breakdown of what we know, why it is so difficult to solve, and what i
+t means for a fluid to "blow up."
+
+---
+
+### 1. The Core of the Problem
+The motion of an incompressible fluid (like water at normal speeds) is governed
+by the **Navier-Stokes equations**.
+
+* **The Setup:** You begin with smooth, physically reasonable starting condition
+s-meaning the fluid has finite energy, smooth velocity profiles, and no infinite
+ speeds or tears.
+* **The Question:** Will the mathematical solution stay smooth and well-behaved
+for all future time ($t \to \infty$), or can the fluid self-concentrate energy i
+nto an infinitesimal point, causing quantities like velocity, pressure, or vorti
+city (spin) to become **infinite in a finite amount of time** (a "blow-up" or si
+ngularity)?
+
+---
+
+### 2. Why is the 3D Case So Difficult?
+
+The main mathematical culprit behind a potential blow-up in three dimensions is
+a phenomenon called **vortex stretching**:
+
+* **In Two Dimensions (2D):** Fluids cannot stretch vortices along a third axis.
+ Vorticity is strictly conserved and transported. Because of this, mathematician
+s (notably Olga Ladyzhenskaya and Jean Leray in the mid-20th century) proved tha
+t **2D fluids will always remain smooth for all time.**
+* **In Three Dimensions (3D):** Eddies and whirlpools can be pulled, stretched,
+and folded in three dimensions. As a vortex tube is stretched, conservation of a
+ngular momentum forces it to spin faster and narrower (like a figure skater pull
+ing in their arms). Mathematically, this creates a nonlinear feedback loop where
+ fluid velocity gradients can feed back into themselves.
+
+The viscosity (internal friction) of the fluid works to smooth things out by dis
+sipating kinetic energy into heat. The entire mystery boils down to: **Does visc
+osity act fast enough to prevent vortex stretching from running away to infinity
+?**
+
+---
+
+### 3. What We *Do* Know
+
+While the complete question remains open, significant partial progress has been
+made:
+
+1. **Short-Time Smoothness:** If you start with smooth conditions, the fluid is
+proven to remain smooth for at least a *short* period of time.
+2. **Small Data:** If the fluid starts out moving very slowly (or the viscosity
+is extraordinarily high), the solutions are proven to remain smooth for all time
+.
+3. **Weak Solutions (Leray, 1934):** Jean Leray proved that "weak" solutions exi
+st for all time. These solutions satisfy the physics on average, but they may co
+ntain singularities where the standard derivatives break down, and it is unknown
+ if these solutions are unique.
+4. **The Euler Equations (Zero Viscosity):** For an idealized fluid with *zero*
+viscosity (the Euler equations), mathematicians have recently made breakthroughs
+. In 2022, Thomas Hou and Jiajie Chen proved that the 3D Euler equations *can* b
+low up in finite time from smooth initial data in a domain with a boundary. Whet
+her this can happen in the viscous Navier-Stokes equations remains unsolved.
+
+---
+
+### 4. What Would "Blow-Up" Mean Physically?
+
+If the equations do allow a blow-up, it does **not** mean real water would sudde
+nly explode with infinite energy.
+
+Instead, it would mean that the Navier-Stokes equations are an incomplete model
+of nature. Navier-Stokes treats a fluid as a smooth continuum. If the equations
+blow up, it means the fluid has concentrated down to such microscopic scales tha
+t the continuum approximation fails, and quantum/molecular mechanics must take o
+ver to describe what happens next.
+
+### Current Consensus
+Mathematicians and physicists remain split:
+* **The "Global Regularity" camp** believes that viscosity is inherently strong
+enough to always prevent infinite gradients.
+* **The "Blow-Up" camp** (which has gained traction due to recent computer simul
+ations and proofs on related equations) suspects that highly tailored, hostile i
+nitial conditions could trigger a runaway singularity.
+
+GOOD
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>

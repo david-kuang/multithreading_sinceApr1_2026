@@ -1,0 +1,267 @@
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python GEMINIaistudiogoogle8_t
+ry1Buildchatgptlike_pythonwebapp.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-05 08:42:35] Attempt #1: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:43:42] Attempt #2: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:44:44] Attempt #3: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:46:45] Attempt #4: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:47:47] Attempt #5: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:48:53] Attempt #6: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:49:55] Attempt #7: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:50:56] Attempt #8: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:52:07] Attempt #9: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:53:13] Attempt #10: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:54:32] Attempt #11: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:55:36] Attempt #12: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:56:42] Attempt #13: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:58:00] Attempt #14: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 08:59:13] Attempt #15: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:00:57] Attempt #16: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:02:14] Attempt #17: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:03:20] Attempt #18: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:04:37] Attempt #19: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:05:39] Attempt #20: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 17h54m57.315689355s.',
+ 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/goog
+le.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'u
+rl': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goo
+gleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate c
+ontent requests per day limit exceeded on Free Tier. See https://ai.google.dev/g
+emini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/
+generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProje
+ctPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini
+-3.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.R
+etryInfo', 'retryDelay': '64497s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:06:40] Attempt #21: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 17h53m57.089072442s.',
+ 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/goog
+le.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'u
+rl': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goo
+gleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate c
+ontent requests per day limit exceeded on Free Tier. See https://ai.google.dev/g
+emini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/
+generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProje
+ctPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.8-flash', 'location
+': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.R
+etryInfo', 'retryDelay': '64437s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:07:40] Attempt #22: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 17h52m56.894250579s.',
+ 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/goog
+le.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'u
+rl': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goo
+gleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate c
+ontent requests per day limit exceeded on Free Tier. See https://ai.google.dev/g
+emini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/
+generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProje
+ctPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini
+-3.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.R
+etryInfo', 'retryDelay': '64376s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:08:40] Attempt #23: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 17h51m56.658403836s.',
+ 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/goog
+le.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'u
+rl': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goo
+gleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate c
+ontent requests per day limit exceeded on Free Tier. See https://ai.google.dev/g
+emini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/
+generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProje
+ctPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini
+-3.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.R
+etryInfo', 'retryDelay': '64316s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:09:40] Attempt #24: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 09:11:03] Attempt #25: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 17h49m33.828213069s.',
+ 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/goog
+le.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'u
+rl': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goo
+gleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate c
+ontent requests per day limit exceeded on Free Tier. See https://ai.google.dev/g
+emini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/
+generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProje
+ctPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.8-flash', 'location
+': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.R
+etryInfo', 'retryDelay': '64173s'}]}}
+
+Next attempt in 60 seconds...
+Traceback (most recent call last):
+  File "c:\workplaceyhk\pythonrelated\pyartifacts\GEMINIaistudiogoogle8_try1Buil
+dchatgptlike_pythonwebapp.py", line 103, in <module>
+    main()
+  File "c:\workplaceyhk\pythonrelated\pyartifacts\GEMINIaistudiogoogle8_try1Buil
+dchatgptlike_pythonwebapp.py", line 100, in main
+    time.sleep(RETRY_INTERVAL)
+KeyboardInterrupt
+^C
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>

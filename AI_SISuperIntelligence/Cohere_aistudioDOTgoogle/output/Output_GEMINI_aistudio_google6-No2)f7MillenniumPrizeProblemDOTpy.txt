@@ -1,0 +1,222 @@
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>type GEMINI_aistudio_google6-N
+o2Of7MillenniumPrizeProblems.py
+import os
+import sys
+import time
+from datetime import datetime
+
+from google import genai
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+MODEL = "gemini-3.8-flash"
+#PROMPT = "Whether smooth, reasonable starting conditions in a three-demensional
+ incompressible fluid will always remain smooth for all time, or if they can blo
+w up."
+PROMPT = "Whether every 'hole-free' three-dimensional shape (a three-sphere) is
+essentially a sphere."
+RETRY_INTERVAL = 60  # seconds
+
+def main():
+
+    if not API_KEY:
+        print("ERROR: GEMINI_API_KEY environment variable not found.")
+        sys.exit(1)
+
+    client = genai.Client(api_key=API_KEY)
+
+    attempt = 0
+
+    print("=" * 60)
+    print("Google Gemini API - Continuous Connection Test")
+    print(f"Model: {MODEL}")
+    print(f"Retry interval: {RETRY_INTERVAL} seconds")
+    print("=" * 60)
+
+    while True:
+
+        attempt += 1
+
+        print(
+            f"\n[{datetime.now():%Y-%m-%d %H:%M:%S}] "
+            f"Attempt #{attempt}: Connecting to Google..."
+        )
+
+        try:
+
+            response = client.models.generate_content(
+                model=MODEL,
+                contents=PROMPT,
+            )
+
+            result = response.text
+
+            if result and result.strip():
+
+                print("\n" + "=" * 60)
+                print("SUCCESS - VALID RESPONSE RECEIVED!")
+                print("=" * 60)
+                print(result)
+
+                sys.exit(0)
+
+            else:
+
+                print("Google returned an empty response.")
+
+        except KeyboardInterrupt:
+
+            print("\nStopped by user.")
+            sys.exit(1)
+
+        except Exception as exc:
+
+            print(f"Connection failed: {type(exc).__name__}: {exc}")
+
+        # Retry after one minute
+        print(f"\nNext attempt in {RETRY_INTERVAL} seconds...")
+        time.sleep(RETRY_INTERVAL)
+
+if __name__ == "__main__":
+    main()
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>python GEMINI_aistudio_google6
+-No2Of7MillenniumPrizeProblems.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-04 22:17:34] Attempt #1: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:22:12] Attempt #2: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:23:12] Attempt #3: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:24:13] Attempt #4: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:25:14] Attempt #5: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:26:17] Attempt #6: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:27:20] Attempt #7: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-04 22:28:28] Attempt #8: Connecting to Google...
+
+============================================================
+SUCCESS - VALID RESPONSE RECEIVED!
+============================================================
+**Yes, this is true.**
+
+The statement you are describing is one of the most famous problems in the histo
+ry of mathematics: the **Poincaré Conjecture**. It was proposed by French mathem
+atician Henri Poincaré in 1904 and remained unsolved for nearly a century until
+it was finally proven by Russian mathematician **Grigori Perelman** in 2002-2003
+.
+
+Here is a breakdown of what that statement actually means, why it was so difficu
+lt, and how it was resolved:
+
+---
+
+### 1. Translating the Terminology
+To understand the conjecture, it helps to translate the everyday words into the
+language of **topology** (the branch of math that studies shapes based on their
+fundamental connectivity, ignoring rigid measurements like angles or lengths):
+
+* **"Essentially a sphere":** In topology, two shapes are considered "essentiall
+y the same" (homeomorphic) if you can deform one into the other by stretching, b
+ending, and squishing, but **without cutting, tearing, or gluing**. A deflated b
+asketball, a cubical balloon, and a smooth marble are all "essentially spheres."
+
+* **"Three-dimensional shape" (3-manifold):** An ordinary sphere (like the surfa
+ce of the Earth) is actually **two-dimensional**-you only need two coordinates (
+latitude and longitude) to describe any location on it. A **3-sphere** is the hi
+gher-dimensional counterpart: it is a 3D "surface" that bounds a 4-dimensional b
+all. If you lived inside a 3-sphere, you could travel in any 3D direction (up/do
+wn, left/right, forward/backward) and eventually end up back where you started,
+without ever hitting a wall.
+* **"Hole-free" (Simply connected):** Imagine taking a giant rubber band (a lass
+o) and throwing it anywhere in the space. If the space is "simply connected," yo
+u can always pull that lasso completely tight down to a single point without it
+getting snagged on a hole (like a donut hole) or an obstacle.
+
+### 2. The Question Poincaré Asked
+Poincaré knew that for a **2D surface**, being finite, having no edges, and havi
+ng no holes meant it **had** to be a standard 2-sphere.
+
+He asked: **Does the same rule apply in three dimensions?**
+> *If a 3D space is finite, has no boundaries, and is completely free of holes (
+simply connected), is it guaranteed to be just a distorted 3-sphere?*
+
+For decades, mathematicians could not prove this. Counterintuitively, the conjec
+ture was proven true for higher dimensions long before it was solved for three:
+* In 1961, Stephen Smale proved it was true for **dimension 5 and higher**.
+* In 1982, Michael Freedman proved it was true for **dimension 4**.
+* Yet dimension 3 resisted all attempts. In 3D, there is "just enough room" for
+shapes to become unimaginably tangled, but not enough room to easily untangle th
+em as one can in higher dimensions.
+
+### 3. The Resolution
+In 2000, the Clay Mathematics Institute designated the Poincaré Conjecture as on
+e of the **seven Millennium Prize Problems**, offering a $1 million reward for i
+ts solution.
+
+Between 2002 and 2003, **Grigori Perelman** posted a series of papers online tha
+t provided the proof. He used a technique known as **Ricci flow with surgery** (
+pioneered by mathematician Richard Hamilton).
+* Think of Ricci flow like a heat equation for geometry: it smooths out the lump
+s, bumps, and bottlenecks of a shape over time.
+* Perelman showed that any hole-free 3D shape, when smoothed out this way, will
+inevitably round out into a perfect 3-sphere, proving Poincaré right.
+
+### 4. The Aftermath
+Perelman's proof was thoroughly verified by the global mathematical community by
+ 2006. In recognition of his achievement, he was offered:
+1. The **Fields Medal** (often called the "Nobel Prize of Mathematics") in 2006.
+
+2. The **$1,000,000 Millennium Prize** in 2010.
+
+Famous for his reclusiveness and indifference to fame and money, Perelman **decl
+ined both awards**, stating that his contribution was no greater than Richard Ha
+milton's, who had laid the groundwork.
+
+To this day, the Poincaré Conjecture is the **only one** of the seven Millennium
+ Prize Problems to have been solved.
+
+(.venv) c:\workplaceyhk\pythonrelated\pyartifacts>

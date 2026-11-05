@@ -696,4 +696,61 @@ response = client.models.generate_content(
 print(response.text)
 
 print("GOOD")
+Thu Nov 5th 2026 prompt {
+Act as an AI engineer, expert Python architect, and Python developer.
+
+I want to build a fully functional, ChatGPT-like web application using Python. 
+The application mush feature a modern chat UI, persistent conversational memory during the session, and proper security practices. 
+
+Please provide the complete code and step-by-step setup instruction based upon the following technical requirements:
+
+1. Architecture & Libraries:
+ - Frontend: Use Streamlit (specificaly 'st.chat_input', 'st.chat_message', and 'st.session_state') to build a clean, reactive chat interface.
+ - AI Engine: Use the official 'openai' Python SDK (v1.0.0+) utilizing the 'client.chat.completions.create' syntax.
+ - Model: Use 'gpt-4o-mini' as the default LLM. 
+ - Environment: Use 'python-dotenv' to securely load the OpenAI API key from a .env file. 
+
+2. Core Features:
+ - Conversational Memory: The app must maintain the context of the current conversation. Store the message history in Streamlit's session state 
+and append both user inputs and assistant responses continuously.
+ - System Persona: Include a clearly defined system prompt at the beginning of the conversation history (e.g., "You are a helpful, concise, 
+and expert AI assistant").
+ - Session Management: Render the historical chat logs on screen in chronological order every time the app reruns.
+
+3. Code Quality:
+ - Ensure the code handles basic exceptions (like missing API keys or API connection errors) gracefully.
+ - Write clean, modular, and beginner-friendly code with concise comments explaining the session state and layout logic.
+ - Do not use deprecated OpenAI syntax (avoid openai.ChatCompletion).
+
+Provide the file structure, the required dependencies for 'requirements.txt', and the full, copy-pasteable 'app.py' script.
+}
+My Version2{
+Act as an AI engineer, expert Python architect, and Python developer.
+
+I want to build a fully functional, ChatGPT-like web application using Python. 
+The application mush feature a modern chat UI, persistent conversational memory during the session, and proper security practices. 
+
+Please provide the complete code and step-by-step setup instruction based upon the following technical requirements:
+
+1. Architecture & Libraries:
+ - Frontend: Use whatever best python frontend framework to build a clean, reactive chat interface.
+ - AI Engine: Use whatever best AI Engine (my Python version is v3.12.3) that is to utilize whatever syntax that must be best practices.
+ - Model: Use 'gemini-3.8-flash' as the default LLM. 
+ - Environment: Use 'python-dotenv' to securely load the GEMINI_API_KEY from a .env file. 
+
+2. Core Features:
+ - Conversational Memory: The app must maintain the context of the current conversation. Store the message history in Streamlit's session state 
+and append both user inputs and assistant responses continuously.
+ - System Persona: Include a clearly defined system prompt at the beginning of the conversation history (e.g., "You are a helpful, concise, 
+and expert AI assistant").
+ - Session Management: Render the historical chat logs on screen in chronological order every time the app reruns.
+
+3. Code Quality:
+ - Ensure the code handles basic exceptions (like missing API keys or API connection errors) gracefully.
+ - Write clean, modular, and beginner-friendly code with concise comments explaining the session state and layout logic.
+ - Do not use deprecated syntax i.e., avoid openai.ChatCompletion.
+
+Provide the file structure, the required dependencies for 'requirements.txt', and the full, copy-pasteable 'app.py' script.
+}
+
 

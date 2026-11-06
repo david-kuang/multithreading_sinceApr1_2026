@@ -524,3 +524,340 @@ ptlike_pythonwebapp.py", line 80, in main
 KeyboardInterrupt
 ^C
 (.venv) C:\workplaceyhk\pythonrelated\pyartifacts>
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\David>cd .venv\Scripts\
+
+C:\Users\David\.venv\Scripts>dir
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\Users\David\.venv\Scripts
+
+11/03/2026  06:00 PM    <DIR>          .
+11/03/2026  06:00 PM    <DIR>          ..
+11/03/2026  05:59 PM             2,034 activate
+11/03/2026  05:59 PM               991 activate.bat
+11/03/2026  05:59 PM            26,199 Activate.ps1
+11/03/2026  06:00 PM           108,338 cffi-gen-src.exe
+11/03/2026  05:59 PM               393 deactivate.bat
+11/03/2026  06:00 PM           108,335 distro.exe
+11/03/2026  06:00 PM           108,327 httpx.exe
+11/03/2026  06:00 PM           108,330 idna.exe
+11/03/2026  06:00 PM           108,356 normalizer.exe
+11/03/2026  06:00 PM           108,396 pip.exe
+11/03/2026  06:00 PM           108,396 pip3.12.exe
+11/03/2026  06:00 PM           108,396 pip3.exe
+11/03/2026  05:59 PM           274,712 python.exe
+11/03/2026  05:59 PM           263,448 pythonw.exe
+11/03/2026  06:00 PM           108,336 websockets.exe
+              15 File(s)      1,542,987 bytes
+               2 Dir(s)  129,669,980,160 bytes free
+
+C:\Users\David\.venv\Scripts>activate.bat
+
+(.venv) C:\Users\David\.venv\Scripts>cd C:\
+
+(.venv) C:\>dir
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\
+
+07/22/2014  05:16 AM    <DIR>          Intel
+07/21/2014  01:49 PM    <DIR>          mfg
+08/22/2013  10:22 AM    <DIR>          PerfLogs
+10/02/2026  05:55 AM    <DIR>          Program Files
+05/14/2026  06:44 AM    <DIR>          Program Files (x86)
+01/01/2026  09:46 PM                 0 Recovery.txt
+01/01/2026  06:55 PM    <DIR>          Users
+10/13/2026  07:00 PM    <DIR>          Windows
+07/06/2026  11:45 AM    <DIR>          workplaceyhk
+               1 File(s)              0 bytes
+               8 Dir(s)  129,669,976,064 bytes free
+
+(.venv) C:\>cd workplaceyhk\pythonrelated\pyartifacts
+
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>dir *.py
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\workplaceyhk\pythonrelated\pyartifacts
+
+11/03/2026  06:12 PM               267 aistudio_google1.py
+11/03/2026  05:16 PM                55 cohere1.py
+11/04/2026  10:41 PM             1,808 GEMINIaistudiogoogle7-No3PversusNPProblem
+Of7MillenniumPrizeProblems.py
+11/05/2026  08:41 AM             3,619 GEMINIaistudiogoogle8_try1Buildchatgptlik
+e_pythonwebapp.py
+11/04/2026  10:02 PM             2,038 GEMINIshuanzhizhuo_aistudio_google5Navier
+_StokesProblem.py
+11/03/2026  09:33 PM             1,865 gemini_aistudio_google2.py
+11/04/2026  04:49 PM             2,056 gemini_aistudio_google3GEMINI_API_KEY.py
+11/04/2026  10:16 PM             1,953 GEMINI_aistudio_google6-No2Of7MillenniumP
+rizeProblems.py
+11/04/2026  05:30 PM               875 generatedByaistudio_googleFour-1.py
+11/05/2026  04:24 PM             2,201 googleGEMINIai9_try2Buildchatgptlike_pyth
+onwebapp.py
+11/04/2026  08:59 PM                77 HW2_Nov4th-2026.py
+11/04/2026  09:19 PM               172 HW3_defSPACEtestingBracketsColon_if__name
+__equalequal_mainCOLON.py
+07/06/2026  12:41 PM               352 openai_helloworld1_apikeyNeeded.py
+07/06/2026  11:55 AM                39 pyHW1.py
+07/06/2026  12:22 PM             1,342 verify_apikeyopenaiDK1.py
+              15 File(s)         18,719 bytes
+               0 Dir(s)  129,670,041,600 bytes free
+
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>dir googleGEMINIai9_try2Buildc
+hatgptlike_pythonwebapp.py
+ Volume in drive C is Windows8_OS
+ Volume Serial Number is D87D-0AAB
+
+ Directory of C:\workplaceyhk\pythonrelated\pyartifacts
+
+11/05/2026  04:24 PM             2,201 googleGEMINIai9_try2Buildchatgptlike_pyth
+onwebapp.py
+               1 File(s)          2,201 bytes
+               0 Dir(s)  129,670,041,600 bytes free
+
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>type googleGEMINIai9_try2Build
+chatgptlike_pythonwebapp.py
+import os
+import sys
+import time
+from datetime import datetime
+
+from google import genai
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+MODEL = "gemini-3.8-flash"
+#PROMPT = "Whether every problem whose solution can be quickly checked by a comp
+uter can also be quickly found by a computer."
+PROMPT = """
+Write a complete, production-ready chatGPT-like web app in Python across a singl
+e output.
+Include every single file, full import statements, complete error handling, data
+base schemas,
+a full suite of unit tests, and an inline documentation guide explaining every f
+unction.
+Do not use 'to be implemented later' comments.
+"""
+
+#Make a zip file so it is downloadable.
+
+RETRY_INTERVAL = 60  # seconds
+
+def main():
+
+    if not API_KEY:
+        print("ERROR: GEMINI_API_KEY environment variable not found.")
+        sys.exit(1)
+
+    client = genai.Client(api_key=API_KEY)
+
+    attempt = 0
+
+    print("=" * 60)
+    print("Google Gemini API - Continuous Connection Test")
+    print(f"Model: {MODEL}")
+    print(f"Retry interval: {RETRY_INTERVAL} seconds")
+    print("=" * 60)
+
+    while True:
+
+        attempt += 1
+
+        print(
+            f"\n[{datetime.now():%Y-%m-%d %H:%M:%S}] "
+            f"Attempt #{attempt}: Connecting to Google..."
+        )
+
+        try:
+
+            response = client.models.generate_content(
+                model=MODEL,
+                contents=PROMPT,
+            )
+
+            result = response.text
+
+            if result and result.strip():
+
+                print("\n" + "=" * 60)
+                print("SUCCESS - VALID RESPONSE RECEIVED!")
+                print("=" * 60)
+                print(result)
+
+                sys.exit(0)
+
+            else:
+
+                print("Google returned an empty response.")
+
+        except KeyboardInterrupt:
+
+            print("\nStopped by user.")
+            sys.exit(1)
+
+        except Exception as exc:
+
+            print(f"Connection failed: {type(exc).__name__}: {exc}")
+
+        # Retry after one minute
+        print(f"\nNext attempt in {RETRY_INTERVAL} seconds...")
+        time.sleep(RETRY_INTERVAL)
+
+if __name__ == "__main__":
+    main()
+
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>python googleGEMINIai9_try2Bui
+ldchatgptlike_pythonwebapp.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-05 16:27:16] Attempt #1: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 10h33m20.848824694s.',
+ 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/goog
+le.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'u
+rl': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goo
+gleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate c
+ontent requests per day limit exceeded on Free Tier. See https://ai.google.dev/g
+emini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/
+generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProje
+ctPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.8-flash', 'location
+': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.R
+etryInfo', 'retryDelay': '38000s'}]}}
+
+Next attempt in 60 seconds...
+Traceback (most recent call last):
+  File "C:\workplaceyhk\pythonrelated\pyartifacts\googleGEMINIai9_try2Buildchatg
+ptlike_pythonwebapp.py", line 83, in <module>
+    main()
+  File "C:\workplaceyhk\pythonrelated\pyartifacts\googleGEMINIai9_try2Buildchatg
+ptlike_pythonwebapp.py", line 80, in main
+    time.sleep(RETRY_INTERVAL)
+KeyboardInterrupt
+^C
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>python googleGEMINIai9_try2Bui
+ldchatgptlike_pythonwebapp.py
+============================================================
+Google Gemini API - Continuous Connection Test
+Model: gemini-3.8-flash
+Retry interval: 60 seconds
+============================================================
+
+[2026-11-05 21:35:52] Attempt #1: Connecting to Google...
+Connection failed: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'messag
+e': 'This model is currently experiencing high demand. Spikes in demand are usua
+lly temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 21:36:53] Attempt #2: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 5h23m43.813305147s.',
+'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/googl
+e.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'ur
+l': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goog
+leapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate co
+ntent requests per day limit exceeded on Free Tier. See https://ai.google.dev/ge
+mini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/g
+enerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjec
+tPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-
+3.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Re
+tryInfo', 'retryDelay': '19423s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 21:37:53] Attempt #3: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 5h22m43.50332278s.', '
+status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google
+.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url
+': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googl
+eapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate con
+tent requests per day limit exceeded on Free Tier. See https://ai.google.dev/gem
+ini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/ge
+nerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProject
+PerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.8-flash', 'location':
+ 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Ret
+ryInfo', 'retryDelay': '19363s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 21:38:54] Attempt #4: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 5h21m43.197049484s.',
+'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/googl
+e.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'ur
+l': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goog
+leapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate co
+ntent requests per day limit exceeded on Free Tier. See https://ai.google.dev/ge
+mini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/g
+enerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjec
+tPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-
+3.8-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Re
+tryInfo', 'retryDelay': '19303s'}]}}
+
+Next attempt in 60 seconds...
+
+[2026-11-05 21:39:54] Attempt #5: Connecting to Google...
+Connection failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429,
+'message': 'You exceeded your current quota, please check your plan and billing
+details. For more information on this error, head to: https://ai.google.dev/gemi
+ni-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/
+rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/gen
+erate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, descriptio
+n: Generate content requests per day limit exceeded on Free Tier. See https://ai
+.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 5h20m42.740906296s.',
+'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/googl
+e.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'ur
+l': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.goog
+leapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate co
+ntent requests per day limit exceeded on Free Tier. See https://ai.google.dev/ge
+mini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/g
+enerate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjec
+tPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.8-flash', 'location'
+: 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.Re
+tryInfo', 'retryDelay': '19242s'}]}}
+
+Next attempt in 60 seconds...
+Traceback (most recent call last):
+  File "C:\workplaceyhk\pythonrelated\pyartifacts\googleGEMINIai9_try2Buildchatg
+ptlike_pythonwebapp.py", line 83, in <module>
+    main()
+  File "C:\workplaceyhk\pythonrelated\pyartifacts\googleGEMINIai9_try2Buildchatg
+ptlike_pythonwebapp.py", line 80, in main
+    time.sleep(RETRY_INTERVAL)
+KeyboardInterrupt
+^C
+(.venv) C:\workplaceyhk\pythonrelated\pyartifacts>

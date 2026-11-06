@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskGemini</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 flex flex-col h-screen font-sans">
+
+    <!-- Auth View Container -->
+    <div id="auth-view" class="flex items-center justify-center flex-1">
+        <div class="bg-slate-900 p-8 rounded-2xl shadow-xl w-96 border border-slate-800">
+            <div class="text-center mb-6">
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">AskGemini</h1>
+                <p class="text-xs text-slate-400 mt-1">Your AI-powered knowledge assistant</p>
+            </div>
+            
+            <div id="auth-error" class="hidden mb-4 p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-xs text-center"></div>
+            
+            <form id="auth-form" onsubmit="handleAuth(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Username</label>
+                    <input type="text" id="auth-username" required class="w-full px-4 py-2.5 bg-slate-950 rounded-xl text-white border border-slate-800 focus:outline-none focus:border-indigo-500 transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Password</label>
+                    <input type="password" id="auth-password" required class="w-full px-4 py-2.5 bg-slate-950 rounded-xl text-white border border-slate-800 focus:outline-none focus:border-indigo-500 transition">
+                </div>
+                <button type="submit" id="auth-submit-btn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl transition shadow-lg shadow-indigo-600/20">Sign In</button>
+            </form>
+            
+            <p class="mt-6 text-center text-sm text-slate-400">
+                <span id="auth-toggle-text">Don't have an account?</span>
+                <button onclick="toggleAuthMode()" id="auth-toggle-btn" class="text-indigo-400 font-medium hover:underline ml-1">Create one</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- Main AskGemini Workspace View -->
+    <div id="app-view" class="hidden flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-72 bg-slate-900 border-r border-slate-800 flex flex-col">
+            <div class="p-4 flex items-center justify-between border-b border-slate-800">
+                <span class="font-bold text-lg bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">AskGemini</span>
+                <button onclick="createNewSession()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold rounded-lg transition shadow">+ New Search</button>
+            </div>
+            <div id="sessions-list" class="flex-1 overflow-y-auto p-3 space-y-1">
+                <!-- Populated dynamically -->
+            </div>
+            <div class="p-4 border-t border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2 truncate">
+                    <div class="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs" id="user-initial">U</div>
+                    <span id="user-display" class="text-xs font-medium truncate text-slate-300">User</span>
+                </div>
+                <button onclick="logout()" class="text-xs text-slate-400 hover:text-red-400 px-2 py-1 rounded transition">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col bg-slate-950">
+            <div id="query-container" class="flex-1 overflow-y-auto p-6 space-y-6 max-w-4xl w-full mx-auto">
+                <div class="flex flex-col items-center justify-center h-full text-center text-slate-500 space-y-2">
+                    <h2 class="text-2xl font-bold text-slate-300">What would you like to know today?</h2>
+                    <p class="text-sm">Ask Gemini anything or explore a new topic.</p>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <div class="p-4 border-t border-slate-900 bg-slate-950">
+                <form id="query-form" onsubmit="submitQuery(event)" class="max-w-4xl mx-auto relative">
+                    <input type="text" id="prompt-input" placeholder="Ask Gemini a question..." required autocomplete="off"
+                           class="w-full px-5 py-4 bg-slate-900 text-white rounded-2xl border border-slate-800 focus:outline-none focus:border-indigo-500 pr-16 shadow-inner transition">
+                    <button type="submit" class="absolute right-2 top-2 bottom-2 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition flex items-center justify-center">Ask</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let isLoginMode = true;
+        let token = localStorage.getItem('token') || '';
+        let currentSessionId = null;
+        let currentUsername = localStorage.getItem('username') || '';
+
+        if (token) { showAppView(); }
+
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('auth-form').reset();
+            document.getElementById('auth-error').classList.add('hidden');
+            document.getElementById('auth-submit-btn').innerText = isLoginMode ? 'Sign In' : 'Create Account';
+            document.getElementById('auth-toggle-text').innerText = isLoginMode ? "Don't have an account?" : "Already have an account?";
+            document.getElementById('auth-toggle-btn').innerText = isLoginMode ? 'Create one' : 'Sign in';
+        }
+
+        async function handleAuth(e) {
+            e.preventDefault();
+            const username = document.getElementById('auth-username').value;
+            const password = document.getElementById('auth-password').value;
+            const errorEl = document.getElementById('auth-error');
+            errorEl.classList.add('hidden');
+
+            try {
+                if (isLoginMode) {
+                    const formData = new URLSearchParams();
+                    formData.append('username', username);
+                    formData.append('password', password);
+
+                    const res = await fetch('/api/auth/token', { method: 'POST', body: formData });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.detail || 'Authentication failed');
+
+                    token = data.access_token;
+                    currentUsername = username;
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('username', currentUsername);
+                    showAppView();
+                } else {
+                    const res = await fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.detail || 'Registration failed');
+                    toggleAuthMode();
+                    alert('Account created successfully! Please sign in.');
+                }
+            } catch (err) {
+                errorEl.innerText = err.message;
+                errorEl.classList.remove('hidden');
+            }
+        }
+
+        function showAppView() {
+            document.getElementById('auth-view').classList.add('hidden');
+            document.getElementById('app-view').classList.remove('hidden');
+            document.getElementById('user-display').innerText = currentUsername;
+            document.getElementById('user-initial').innerText = currentUsername.charAt(0).toUpperCase();
+            loadSessions();
+        }
+
+        function logout() {
+            token = '';
+            currentUsername = '';
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+            document.getElementById('app-view').classList.add('hidden');
+            document.getElementById('auth-view').classList.remove('hidden');
+        }
+
+        async function loadSessions() {
+            const res = await fetch('/api/sessions', { headers: { 'Authorization': `Bearer ${token}` } });
+            if (res.status === 401) return logout();
+            const sessions = await res.json();
+            const listEl = document.getElementById('sessions-list');
+            listEl.innerHTML = '';
+
+            sessions.forEach(s => {
+                const div = document.createElement('div');
+                div.className = `flex justify-between items-center p-2.5 rounded-xl cursor-pointer text-xs font-medium transition ${s.id === currentSessionId ? 'bg-indigo-600/20 text-indigo-300 border border-indigo-500/30' : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'}`;
+                div.innerHTML = `
+                    <span onclick="selectSession(${s.id})" class="truncate flex-1">${escapeHtml(s.title)}</span>
+                    <button onclick="deleteSession(${s.id}, event)" class="text-slate-500 hover:text-red-400 px-1.5 py-0.5">✕</button>
+                `;
+                listEl.appendChild(div);
+            });
+        }
+
+        async function createNewSession() {
+            const res = await fetch('/api/sessions', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const session = await res.json();
+            await loadSessions();
+            selectSession(session.id);
+        }
+
+        async function selectSession(id) {
+            currentSessionId = id;
+            await loadSessions();
+
+            const res = await fetch(`/api/sessions/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const session = await res.json();
+            renderQueries(session.queries);
+        }
+
+        async function deleteSession(id, e) {
+            e.stopPropagation();
+            await fetch(`/api/sessions/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (currentSessionId === id) {
+                currentSessionId = null;
+                document.getElementById('query-container').innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full text-center text-slate-500 space-y-2">
+                        <h2 class="text-2xl font-bold text-slate-300">What would you like to know today?</h2>
+                        <p class="text-sm">Ask Gemini anything or explore a new topic.</p>
+                    </div>`;
+            }
+            loadSessions();
+        }
+
+        function renderQueries(queries) {
+            const container = document.getElementById('query-container');
+            if (queries.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full text-center text-slate-500 space-y-2">
+                        <h2 class="text-2xl font-bold text-slate-300">What would you like to know today?</h2>
+                        <p class="text-sm">Ask Gemini anything or explore a new topic.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            queries.forEach(q => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'space-y-4';
+                itemDiv.innerHTML = `
+                    <div class="flex justify-end">
+                        <div class="bg-indigo-600 text-white px-5 py-3 rounded-2xl max-w-xl text-sm font-medium shadow-md">
+                            ${escapeHtml(q.prompt)}
+                        </div>
+                    </div>
+                    <div class="flex justify-start">
+                        <div class="bg-slate-900 border border-slate-800 text-slate-200 px-6 py-4 rounded-2xl max-w-2xl text-sm leading-relaxed shadow-md space-y-2">
+                            <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Gemini Answer</div>
+                            <div class="whitespace-pre-wrap">${escapeHtml(q.response)}</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function submitQuery(e) {
+            e.preventDefault();
+            const input = document.getElementById('prompt-input');
+            const prompt = input.value.trim();
+            if (!prompt) return;
+
+            if (!currentSessionId) {
+                const res = await fetch('/api/sessions', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const session = await res.json();
+                currentSessionId = session.id;
+            }
+
+            input.value = '';
+
+            // Optimistic UI append
+            const container = document.getElementById('query-container');
+            // Remove empty state if present
+            if (container.querySelector('h2')) {
+                container.innerHTML = '';
+            }
+
+            const tempDiv = document.createElement('div');
+            tempDiv.className = 'space-y-4';
+            tempDiv.innerHTML = `
+                <div class="flex justify-end">
+                    <div class="bg-indigo-600 text-white px-5 py-3 rounded-2xl max-w-xl text-sm font-medium shadow-md">
+                        ${escapeHtml(prompt)}
+                    </div>
+                </div>
+            `;
+            container.appendChild(tempDiv);
+            container.scrollTop = container.scrollHeight;
+
+            const res = await fetch(`/api/sessions/${currentSessionId}/queries`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ prompt })
+            });
+
+            if (res.ok) {
+                await selectSession(currentSessionId);
+            }
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-google-generativeai
-sqlalchemy
-pydantic
-pytest
-httpx

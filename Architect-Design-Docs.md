@@ -13,4 +13,4 @@ Main method: Build a AI Web Chat App with the Gemini API (& Cloud Run)
 
 Alternative method: Build a Google Chat App (Workspace Integration)
 If you want a chat app that lives inside Google Chat rather than a custom web page:
-1. Use
+1. Use 
